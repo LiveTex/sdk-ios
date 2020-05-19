@@ -1,0 +1,579 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		156A44ADDAA1BF38B1BE28D4 /* Pods_LivetexMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */; };
+		6125A1192474716B00A92C0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1182474716B00A92C0D /* AppDelegate.swift */; };
+		6125A1202474716B00A92C0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6125A11E2474716B00A92C0D /* Main.storyboard */; };
+		6125A1222474716E00A92C0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6125A1212474716E00A92C0D /* Assets.xcassets */; };
+		6125A1252474716E00A92C0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6125A1232474716E00A92C0D /* LaunchScreen.storyboard */; };
+		6125A1352474735500A92C0D /* OperatorAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1322474735500A92C0D /* OperatorAvatarView.swift */; };
+		6125A1362474735500A92C0D /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1332474735500A92C0D /* TitleView.swift */; };
+		6125A1372474735500A92C0D /* DepartmentsPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1342474735500A92C0D /* DepartmentsPickerView.swift */; };
+		6125A1392474739400A92C0D /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1382474739400A92C0D /* ChatViewController.swift */; };
+		6125A14D2474748E00A92C0D /* LivetexSessionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A13B2474748E00A92C0D /* LivetexSessionService.swift */; };
+		6125A14E2474748E00A92C0D /* SessionToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A13C2474748E00A92C0D /* SessionToken.swift */; };
+		6125A14F2474748E00A92C0D /* LivetexLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A13D2474748E00A92C0D /* LivetexLoginService.swift */; };
+		6125A1502474748E00A92C0D /* DateFormatter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1402474748E00A92C0D /* DateFormatter+Factory.swift */; };
+		6125A1512474748E00A92C0D /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1422474748E00A92C0D /* Attributes.swift */; };
+		6125A1522474748E00A92C0D /* Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1432474748E00A92C0D /* Type.swift */; };
+		6125A1532474748E00A92C0D /* MessageContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1452474748E00A92C0D /* MessageContent.swift */; };
+		6125A1542474748E00A92C0D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1462474748E00A92C0D /* Message.swift */; };
+		6125A1552474748E00A92C0D /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1472474748E00A92C0D /* MessageItem.swift */; };
+		6125A1562474748E00A92C0D /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1482474748E00A92C0D /* Department.swift */; };
+		6125A1572474748E00A92C0D /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1492474748E00A92C0D /* Response.swift */; };
+		6125A1582474748E00A92C0D /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A14A2474748E00A92C0D /* Request.swift */; };
+		6125A1592474748E00A92C0D /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A14B2474748E00A92C0D /* Employee.swift */; };
+		6125A15A2474748E00A92C0D /* Dialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A14C2474748E00A92C0D /* Dialog.swift */; };
+		6125A15E2474760B00A92C0D /* ChatViewModel+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A15C2474760B00A92C0D /* ChatViewModel+Messages.swift */; };
+		6125A15F2474760B00A92C0D /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A15D2474760B00A92C0D /* ChatViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2AACDEDDF06D6BA089F2E005 /* Pods-LivetexMessaging.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivetexMessaging.release.xcconfig"; path = "Target Support Files/Pods-LivetexMessaging/Pods-LivetexMessaging.release.xcconfig"; sourceTree = "<group>"; };
+		6125A1152474716B00A92C0D /* LivetexMessaging.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LivetexMessaging.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6125A1182474716B00A92C0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6125A11F2474716B00A92C0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6125A1212474716E00A92C0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6125A1242474716E00A92C0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6125A1262474716E00A92C0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6125A1322474735500A92C0D /* OperatorAvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperatorAvatarView.swift; sourceTree = "<group>"; };
+		6125A1332474735500A92C0D /* TitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		6125A1342474735500A92C0D /* DepartmentsPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepartmentsPickerView.swift; sourceTree = "<group>"; };
+		6125A1382474739400A92C0D /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		6125A13B2474748E00A92C0D /* LivetexSessionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivetexSessionService.swift; sourceTree = "<group>"; };
+		6125A13C2474748E00A92C0D /* SessionToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionToken.swift; sourceTree = "<group>"; };
+		6125A13D2474748E00A92C0D /* LivetexLoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivetexLoginService.swift; sourceTree = "<group>"; };
+		6125A1402474748E00A92C0D /* DateFormatter+Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Factory.swift"; sourceTree = "<group>"; };
+		6125A1422474748E00A92C0D /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attributes.swift; sourceTree = "<group>"; };
+		6125A1432474748E00A92C0D /* Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Type.swift; sourceTree = "<group>"; };
+		6125A1452474748E00A92C0D /* MessageContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageContent.swift; sourceTree = "<group>"; };
+		6125A1462474748E00A92C0D /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		6125A1472474748E00A92C0D /* MessageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
+		6125A1482474748E00A92C0D /* Department.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
+		6125A1492474748E00A92C0D /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		6125A14A2474748E00A92C0D /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		6125A14B2474748E00A92C0D /* Employee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		6125A14C2474748E00A92C0D /* Dialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dialog.swift; sourceTree = "<group>"; };
+		6125A15C2474760B00A92C0D /* ChatViewModel+Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatViewModel+Messages.swift"; sourceTree = "<group>"; };
+		6125A15D2474760B00A92C0D /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LivetexMessaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D93B122FDADFB26DE38B9D86 /* Pods-LivetexMessaging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivetexMessaging.debug.xcconfig"; path = "Target Support Files/Pods-LivetexMessaging/Pods-LivetexMessaging.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6125A1122474716B00A92C0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				156A44ADDAA1BF38B1BE28D4 /* Pods_LivetexMessaging.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6125A10C2474716B00A92C0D = {
+			isa = PBXGroup;
+			children = (
+				6125A1172474716B00A92C0D /* LivetexMessaging */,
+				6125A1162474716B00A92C0D /* Products */,
+				CF939B5E615AC1797200BF3E /* Pods */,
+				9A024361532872214D07A071 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6125A1162474716B00A92C0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6125A1152474716B00A92C0D /* LivetexMessaging.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6125A1172474716B00A92C0D /* LivetexMessaging */ = {
+			isa = PBXGroup;
+			children = (
+				6125A12E2474725700A92C0D /* AppDelegate */,
+				6125A1312474733100A92C0D /* LivetexCore */,
+				6125A12C2474722600A92C0D /* Resources */,
+				6125A12D2474724E00A92C0D /* ViewControllers */,
+				6125A15B247475EC00A92C0D /* ViewModel */,
+				6125A1302474732500A92C0D /* Views */,
+			);
+			path = LivetexMessaging;
+			sourceTree = "<group>";
+		};
+		6125A12C2474722600A92C0D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6125A1212474716E00A92C0D /* Assets.xcassets */,
+				6125A1262474716E00A92C0D /* Info.plist */,
+				6125A1232474716E00A92C0D /* LaunchScreen.storyboard */,
+				6125A11E2474716B00A92C0D /* Main.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6125A12D2474724E00A92C0D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6125A1382474739400A92C0D /* ChatViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6125A12E2474725700A92C0D /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				6125A1182474716B00A92C0D /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		6125A1302474732500A92C0D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6125A1342474735500A92C0D /* DepartmentsPickerView.swift */,
+				6125A1322474735500A92C0D /* OperatorAvatarView.swift */,
+				6125A1332474735500A92C0D /* TitleView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6125A1312474733100A92C0D /* LivetexCore */ = {
+			isa = PBXGroup;
+			children = (
+				6125A13E2474748E00A92C0D /* Extensions */,
+				6125A1412474748E00A92C0D /* Models */,
+				6125A13A2474748E00A92C0D /* Services */,
+			);
+			path = LivetexCore;
+			sourceTree = "<group>";
+		};
+		6125A13A2474748E00A92C0D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				6125A13B2474748E00A92C0D /* LivetexSessionService.swift */,
+				6125A13C2474748E00A92C0D /* SessionToken.swift */,
+				6125A13D2474748E00A92C0D /* LivetexLoginService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6125A13E2474748E00A92C0D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6125A13F2474748E00A92C0D /* DateFormatter */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6125A13F2474748E00A92C0D /* DateFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				6125A1402474748E00A92C0D /* DateFormatter+Factory.swift */,
+			);
+			path = DateFormatter;
+			sourceTree = "<group>";
+		};
+		6125A1412474748E00A92C0D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6125A1422474748E00A92C0D /* Attributes.swift */,
+				6125A1432474748E00A92C0D /* Type.swift */,
+				6125A1442474748E00A92C0D /* Message */,
+				6125A1482474748E00A92C0D /* Department.swift */,
+				6125A1492474748E00A92C0D /* Response.swift */,
+				6125A14A2474748E00A92C0D /* Request.swift */,
+				6125A14B2474748E00A92C0D /* Employee.swift */,
+				6125A14C2474748E00A92C0D /* Dialog.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6125A1442474748E00A92C0D /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				6125A1452474748E00A92C0D /* MessageContent.swift */,
+				6125A1462474748E00A92C0D /* Message.swift */,
+				6125A1472474748E00A92C0D /* MessageItem.swift */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
+		6125A15B247475EC00A92C0D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6125A15D2474760B00A92C0D /* ChatViewModel.swift */,
+				6125A15C2474760B00A92C0D /* ChatViewModel+Messages.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		9A024361532872214D07A071 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CF939B5E615AC1797200BF3E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D93B122FDADFB26DE38B9D86 /* Pods-LivetexMessaging.debug.xcconfig */,
+				2AACDEDDF06D6BA089F2E005 /* Pods-LivetexMessaging.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6125A1142474716B00A92C0D /* LivetexMessaging */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6125A1292474716E00A92C0D /* Build configuration list for PBXNativeTarget "LivetexMessaging" */;
+			buildPhases = (
+				B07C3AFE8C69F051FAE1B3C7 /* [CP] Check Pods Manifest.lock */,
+				6125A1112474716B00A92C0D /* Sources */,
+				6125A1122474716B00A92C0D /* Frameworks */,
+				6125A1132474716B00A92C0D /* Resources */,
+				B599BB4949194246BF93101C /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LivetexMessaging;
+			productName = LivetexMessaging;
+			productReference = 6125A1152474716B00A92C0D /* LivetexMessaging.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6125A10D2474716B00A92C0D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = Livetex;
+				TargetAttributes = {
+					6125A1142474716B00A92C0D = {
+						CreatedOnToolsVersion = 11.4.1;
+					};
+				};
+			};
+			buildConfigurationList = 6125A1102474716B00A92C0D /* Build configuration list for PBXProject "LivetexMessaging" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6125A10C2474716B00A92C0D;
+			productRefGroup = 6125A1162474716B00A92C0D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6125A1142474716B00A92C0D /* LivetexMessaging */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6125A1132474716B00A92C0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6125A1252474716E00A92C0D /* LaunchScreen.storyboard in Resources */,
+				6125A1222474716E00A92C0D /* Assets.xcassets in Resources */,
+				6125A1202474716B00A92C0D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B07C3AFE8C69F051FAE1B3C7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LivetexMessaging-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B599BB4949194246BF93101C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LivetexMessaging/Pods-LivetexMessaging-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LivetexMessaging/Pods-LivetexMessaging-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LivetexMessaging/Pods-LivetexMessaging-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6125A1112474716B00A92C0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6125A15A2474748E00A92C0D /* Dialog.swift in Sources */,
+				6125A15F2474760B00A92C0D /* ChatViewModel.swift in Sources */,
+				6125A14D2474748E00A92C0D /* LivetexSessionService.swift in Sources */,
+				6125A1592474748E00A92C0D /* Employee.swift in Sources */,
+				6125A1352474735500A92C0D /* OperatorAvatarView.swift in Sources */,
+				6125A1562474748E00A92C0D /* Department.swift in Sources */,
+				6125A1552474748E00A92C0D /* MessageItem.swift in Sources */,
+				6125A1192474716B00A92C0D /* AppDelegate.swift in Sources */,
+				6125A14E2474748E00A92C0D /* SessionToken.swift in Sources */,
+				6125A1502474748E00A92C0D /* DateFormatter+Factory.swift in Sources */,
+				6125A1582474748E00A92C0D /* Request.swift in Sources */,
+				6125A15E2474760B00A92C0D /* ChatViewModel+Messages.swift in Sources */,
+				6125A1522474748E00A92C0D /* Type.swift in Sources */,
+				6125A1572474748E00A92C0D /* Response.swift in Sources */,
+				6125A1372474735500A92C0D /* DepartmentsPickerView.swift in Sources */,
+				6125A1392474739400A92C0D /* ChatViewController.swift in Sources */,
+				6125A1362474735500A92C0D /* TitleView.swift in Sources */,
+				6125A1542474748E00A92C0D /* Message.swift in Sources */,
+				6125A1512474748E00A92C0D /* Attributes.swift in Sources */,
+				6125A14F2474748E00A92C0D /* LivetexLoginService.swift in Sources */,
+				6125A1532474748E00A92C0D /* MessageContent.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6125A11E2474716B00A92C0D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6125A11F2474716B00A92C0D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6125A1232474716E00A92C0D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6125A1242474716E00A92C0D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6125A1272474716E00A92C0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6125A1282474716E00A92C0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6125A12A2474716E00A92C0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D93B122FDADFB26DE38B9D86 /* Pods-LivetexMessaging.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FJE97HEJ7P;
+				INFOPLIST_FILE = "$(SRCROOT)/LivetexMessaging/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.livetex.mobile.messaging;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Livetex Messaging Dev";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6125A12B2474716E00A92C0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2AACDEDDF06D6BA089F2E005 /* Pods-LivetexMessaging.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FJE97HEJ7P;
+				INFOPLIST_FILE = "$(SRCROOT)/LivetexMessaging/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.livetex.mobile.messaging;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "Livetex Messaging Dist";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6125A1102474716B00A92C0D /* Build configuration list for PBXProject "LivetexMessaging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6125A1272474716E00A92C0D /* Debug */,
+				6125A1282474716E00A92C0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6125A1292474716E00A92C0D /* Build configuration list for PBXNativeTarget "LivetexMessaging" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6125A12A2474716E00A92C0D /* Debug */,
+				6125A12B2474716E00A92C0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6125A10D2474716B00A92C0D /* Project object */;
+}
