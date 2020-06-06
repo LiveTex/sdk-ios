@@ -2,7 +2,7 @@
 //  TitleView.swift
 //  LivetexMessaging
 //
-//  Created by Emil Abduselimov on 19.05.2020.
+//  Created by Livetex on 19.05.2020.
 //  Copyright © 2020 Livetex. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ class TitleView: UIView {
         set {
             if newValue != title {
                 titleLabel.text = newValue
+                setNeedsLayout()
             }
         }
     }
@@ -28,6 +29,8 @@ class TitleView: UIView {
         set {
             if newValue != subtitle {
                 subtitleLabel.text = newValue
+                subtitleLabel.isHidden = newValue?.isEmpty ?? true
+                setNeedsLayout()
             }
         }
     }
@@ -45,6 +48,7 @@ class TitleView: UIView {
         label.font = .systemFont(ofSize: 13)
         label.textAlignment = .center
         label.textColor = .black
+        label.isHidden = true
         return label
     }()
 
@@ -69,7 +73,7 @@ class TitleView: UIView {
         titleLabel.frame = CGRect(x: 0,
                                   y: 0,
                                   width: bounds.width,
-                                  height: round(titleLabel.font.lineHeight))
+                                  height: subtitleLabel.isHidden ? bounds.height : titleLabel.font.lineHeight)
 
         subtitleLabel.frame = CGRect(x: 0,
                                      y: titleLabel.frame.maxY,

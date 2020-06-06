@@ -1,117 +1,195 @@
 //
 //  ChatViewModel.swift
-//  LivetexWebSocket
+//  LivetexMessaging
 //
-//  Created by Emil Abduselimov on 11.05.2020.
-//  Copyright © 2020 Emil Abduselimov. All rights reserved.
+//  Created by Livetex on 19.05.2020.
+//  Copyright © 2020 Livetex. All rights reserved.
 //
 
 import UIKit
 import MessageKit
+import LivetexCore
 
 class ChatViewModel {
 
     var onDepartmentReceived: (([Department]) -> Void)?
-    var onMessagesReceived: (() -> Void)?
-    var onDialogStateReceived: ((Dialog) -> Void)?
+    var onLoadMoreMessages: (([ChatMessage]) -> Void)?
+    var onMessagesReceived: (([ChatMessage]) -> Void)?
+    var onDialogStateReceived: ((Conversation) -> Void)?
+    var onAttributesReceived: (() -> Void)?
+    var onTypingReceived: (() -> Void)?
 
-    private(set) var messages: [MessageType] = []
+    var followMessage: String?
+    var messages: [ChatMessage] = []
 
-    private(set) var user = Recipient(senderId: UUID().uuidString,
-                                      displayName: "Тестов Тест")
-
-    private(set) var receiver = Recipient(senderId: UUID().uuidString,
-                                          displayName: "")
+    var user = Recipient(senderId: UUID().uuidString, displayName: "")
 
     private(set) var sessionService: LivetexSessionService?
+
+    private let loadMoreOffset = 20
+
+    private(set) var isContentLoaded = false
+    private(set) var isLoadingMore = false
+
+    private var isCanLoadMore = true
+
+    private(set) var isEmployeeEstimated = true
+
+    private let settings = Settings()
 
     // MARK: - Initialization
 
     init() {
-        configure()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationWillEnterForeground),
+                                               name: UIApplication.willEnterForegroundNotification,
+                                               object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationDidRegisterForRemoteNotifications(_:)),
+                                               name: UIApplication.didRegisterForRemoteNotifications,
+                                               object: nil)
     }
 
     // MARK: - Configuration
 
-    private func configure() {
-        let loginService = LivetexLoginService(clientID: "731D5678-C34C-4E87-AD28-0DCCB49BCEAA")
-        loginService.requestAuthentication { [weak self] result in
-            switch result {
-            case let .success(token):
-                self?.sessionService = LivetexSessionService(sessionToken: token)
-                self?.sessionService?.onResponseReceived = { [weak self] response in
-                    self?.receiveResponse(response)
+    private func requestAuthentication(deviceToken: String) {
+        let loginService = LivetexAuthService(token: settings.visitorToken.map { .system($0) },
+                                               deviceToken: deviceToken)
+
+        loginService.requestAuthorization { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case let .success(token):
+                    self?.startSession(token: token)
+                case let .failure(error):
+                    print(error.localizedDescription)
                 }
-                self?.sessionService?.connect()
-            case let .failure(error):
-                print(error.localizedDescription)
             }
         }
     }
 
-    func sendRequest(_ request: Request) {
-        sessionService?.sendRequest(request)
+    private func startSession(token: SessionToken) {
+        settings.visitorToken = token.visitorToken
+        sessionService = LivetexSessionService(token: token)
+        sessionService?.onEvent = { [weak self] event in
+            self?.didReceive(event: event)
+        }
+
+        sessionService?.connect()
     }
 
+    func loadMoreMessagesIfNeeded() {
+        guard isCanLoadMore else {
+            return
+        }
 
-    // MARK: - Response
+        let event = ClientEvent(.getHistory(messages.first?.messageId ?? "", loadMoreOffset))
+        sessionService?.sendEvent(event)
+        isLoadingMore = true
+    }
 
-    private func receiveResponse(_ response: Response) {
-        switch response {
+    // MARK: - Application Lifecycle
+
+    @objc private func applicationDidEnterBackground() {
+        sessionService?.disconnect()
+    }
+
+    @objc private func applicationWillEnterForeground() {
+        sessionService?.connect()
+    }
+
+    @objc private func applicationDidRegisterForRemoteNotifications(_ notification: Notification) {
+        let deviceToken = notification.object as? String
+        requestAuthentication(deviceToken: deviceToken ?? "")
+    }
+
+    // MARK: - Session
+
+    func sendEvent(_ event: ClientEvent) {
+        let isConnected = sessionService?.isConnected ?? false
+        if !isConnected {
+            sessionService?.connect()
+        }
+
+        sessionService?.sendEvent(event)
+    }
+
+    private func didReceive(event: ServiceEvent) {
+        switch event {
         case let .result(result):
             print(result)
-        case let .dialog(result):
-            dialogReceived(result)
+        case let .state(result):
+            isEmployeeEstimated = result.isEmployeeEstimated
+            onDialogStateReceived?(result)
         case .attributes:
-            attributesReceived()
+            onAttributesReceived?()
         case let .departments(result):
-            departmentsReceived(departments: result.departments)
-        case let .history(result):
-            messageHistoryReceived(messages: result.messages)
-        default:
-            print(response)
+            onDepartmentReceived?(result.departments)
+        case let .update(result):
+            messageHistoryReceived(items: result.messages)
+        case .employeeTyping:
+            onTypingReceived?()
         }
     }
 
-    private func dialogReceived(_ dialog: Dialog) {
-        receiver.displayName = dialog.employee.name
-        onDialogStateReceived?(dialog)
+    func isPreviousMessageSameDate(at index: Int) -> Bool {
+        guard index - 1 >= 0 else {
+            return false
+        }
+
+        let currentDate = messages[index].sentDate
+        let previousDate = messages[index - 1].sentDate
+        return Calendar.current.isDate(currentDate, inSameDayAs: previousDate)
     }
 
-    private func attributesReceived() {
-        let attributes = Attributes(name: "Тестов Тест", phone: "123456789", email: "test@test.ru")
-        sendRequest(.attributes(attributes))
-    }
-
-    private func departmentsReceived(departments: [Department]) {
-        onDepartmentReceived?(departments)
-    }
-
-    private func messageHistoryReceived(messages: [MessageItem]) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.messages += messages.map {
-                let kind: MessageKind
-                let sender = $0.creator.isUser ? self.user : self.receiver
-                switch $0.content {
-                case let .text(text):
-                    kind = .text(text)
-                case let .file(attachment):
-                    let file = File(url: URL(string: attachment.url),
-                                    image: nil,
-                                    placeholderImage: UIImage(),
-                                    size: CGSize(width: 240, height: 240))
-                    kind = .photo(file)
+    private func convertMessages(_ messages: [Message]) -> [ChatMessage] {
+        return messages.map {
+            let kind: MessageKind
+            let sender = $0.creator.isVisitor ? self.user : Recipient(senderId: "",
+                                                                      displayName: $0.creator.employee?.name ?? "")
+            switch $0.content {
+            case let .text(text):
+                let extensions: Set<String> = ["png", "jpg", "jpeg", "gif"]
+                if extensions.contains((text as NSString).pathExtension) {
+                    kind = .photo(File(url: text))
+                } else if text.first == ">" {
+                    let texts = text.trimmingCharacters(in: CharacterSet(charactersIn: "> ")).split(separator: "\n")
+                    kind = .custom(CustomType.follow(String(texts.first ?? ""), String(texts.last ?? "")))
+                } else {
+                    kind = $0.creator.type == .system ? .custom(CustomType.system(text)) : .text(text)
                 }
-
-                return ChatMessage(sender: sender,
-                                   messageId: $0.id,
-                                   sentDate: $0.createdAt,
-                                   kind: kind,
-                                   creator: $0.creator)
+            case let .file(attachment):
+                kind = .photo(File(url: attachment.url))
             }
 
+            return ChatMessage(sender: sender,
+                               messageId: $0.id,
+                               sentDate: $0.createdAt,
+                               kind: kind,
+                               creator: $0.creator)
+        }
+    }
+
+    private func messageHistoryReceived(items: [Message]) {
+        guard !items.isEmpty else {
+            isCanLoadMore = false
+            return
+        }
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.isLoadingMore = false
+            var newMessages = Array(Set(self.convertMessages(items)).subtracting(self.messages))
+            let currentDate = self.messages.first?.sentDate ?? Date()
+            let receivedDate = newMessages.last?.sentDate ?? Date()
+            newMessages.sort(by: { $0.sentDate < $1.sentDate })
             DispatchQueue.main.async {
-                self.onMessagesReceived?()
+                if !self.messages.isEmpty, receivedDate.compare(currentDate) == .orderedAscending {
+                    self.onLoadMoreMessages?(newMessages)
+                } else {
+                    self.onMessagesReceived?(newMessages)
+                    self.isContentLoaded = true
+                }
             }
         }
     }

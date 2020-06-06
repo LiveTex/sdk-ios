@@ -1,22 +1,39 @@
 //
 //  ChatViewModel+Messages.swift
-//  LivetexWebSocket
+//  LivetexMessaging
 //
-//  Created by Emil Abduselimov on 13.05.2020.
-//  Copyright © 2020 Emil Abduselimov. All rights reserved.
+//  Created by Livetex on 19.05.2020.
+//  Copyright © 2020 Livetex. All rights reserved.
 //
 
 import UIKit
 import MessageKit
+import LivetexCore
+
+enum CustomType {
+    case system(String)
+    case follow(String, String)
+}
 
 extension ChatViewModel {
 
-    struct ChatMessage: MessageType {
+    struct ChatMessage: MessageType, Hashable {
         var sender: SenderType
         var messageId: String
         var sentDate: Date
         var kind: MessageKind
         var creator: Creator
+
+        // MARK: - Hashable
+
+        func hash(into hasher: inout Hasher) {
+            return hasher.combine(messageId)
+        }
+
+        static func == (lhs: ChatViewModel.ChatMessage, rhs: ChatViewModel.ChatMessage) -> Bool {
+            return lhs.messageId == rhs.messageId
+        }
+
     }
 
     struct Recipient: SenderType {
@@ -32,6 +49,18 @@ extension ChatViewModel {
         var placeholderImage: UIImage
 
         var size: CGSize
+
+        // MARK: - Initialization
+
+        init(url: String,
+             image: UIImage? = nil,
+             placeholderImage: UIImage = UIImage(),
+             size: CGSize = CGSize(width: 240, height: 240)) {
+            self.url = URL(string: url, relativeTo: URL(string: "https://"))
+            self.image = image
+            self.placeholderImage = placeholderImage
+            self.size = size
+        }
     }
 
 }
