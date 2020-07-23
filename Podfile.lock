@@ -1,0 +1,54 @@
+PODS:
+  - BFRImageViewer (1.2.9):
+    - PINRemoteImage (~> 3.0.0)
+  - InputBarAccessoryView (4.3.2):
+    - InputBarAccessoryView/Core (= 4.3.2)
+  - InputBarAccessoryView/Core (4.3.2)
+  - Kingfisher (5.13.4):
+    - Kingfisher/Core (= 5.13.4)
+  - Kingfisher/Core (5.13.4)
+  - MessageKit (3.1.0):
+    - InputBarAccessoryView (~> 4.3.0)
+  - PINCache (3.0.1-beta.8):
+    - PINCache/Arc-exception-safe (= 3.0.1-beta.8)
+    - PINCache/Core (= 3.0.1-beta.8)
+  - PINCache/Arc-exception-safe (3.0.1-beta.8):
+    - PINCache/Core
+  - PINCache/Core (3.0.1-beta.8):
+    - PINOperation (~> 1.1.1)
+  - PINOperation (1.1.2)
+  - PINRemoteImage (3.0.0):
+    - PINRemoteImage/PINCache (= 3.0.0)
+  - PINRemoteImage/Core (3.0.0):
+    - PINOperation
+  - PINRemoteImage/PINCache (3.0.0):
+    - PINCache (= 3.0.1-beta.8)
+    - PINRemoteImage/Core
+
+DEPENDENCIES:
+  - BFRImageViewer
+  - Kingfisher
+  - MessageKit
+
+SPEC REPOS:
+  trunk:
+    - BFRImageViewer
+    - InputBarAccessoryView
+    - Kingfisher
+    - MessageKit
+    - PINCache
+    - PINOperation
+    - PINRemoteImage
+
+SPEC CHECKSUMS:
+  BFRImageViewer: 57f7ba6055956d383b49577a78643fa442e70aa4
+  InputBarAccessoryView: 7985d418040a05fe894bd4b8328dd43ab35517c3
+  Kingfisher: d2279a7abece3c7f25a80cd2b7f363ca5cf3f44c
+  MessageKit: 3beb578737a5aa2bba25cc27c7b6d6faa09af5a7
+  PINCache: 534fd41d358d828dfdf227a0d327f3673a65e20b
+  PINOperation: 24b774353ca248fcf87d67b2d61eef42087c125a
+  PINRemoteImage: e2b89e19fb6e77ffc099f9d9f3b3fe1745e3f9f9
+
+PODFILE CHECKSUM: 423402dde9ca95585bfeffc5c08d25891920de70
+
+COCOAPODS: 1.9.1
