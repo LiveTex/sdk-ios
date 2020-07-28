@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,20 +37,10 @@
 		618B623724B3860B00CD46BB /* FollowTextMessageSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B623624B3860B00CD46BB /* FollowTextMessageSizeCalculator.swift */; };
 		618B623924B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B623824B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift */; };
 		618B623B24B3C35700CD46BB /* MessageInputBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B623A24B3C35700CD46BB /* MessageInputBarView.swift */; };
-		61A91AA324C8B60A0084DF2F /* LivetexCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A91AA224C8B6030084DF2F /* LivetexCore.framework */; };
-		61A91AA424C8B60A0084DF2F /* LivetexCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 61A91AA224C8B6030084DF2F /* LivetexCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		61F0308C24A3E4F1006FF160 /* DebouncedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0308B24A3E4F1006FF160 /* DebouncedFunction.swift */; };
+		61FE188524D07ABA00BF90F6 /* LivetexCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FE188424D07ABA00BF90F6 /* LivetexCore.xcframework */; };
+		61FE188624D07ABA00BF90F6 /* LivetexCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 61FE188424D07ABA00BF90F6 /* LivetexCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		61A91AA124C8B6030084DF2F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 61A91A9D24C8B6030084DF2F /* LivetexCore.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 61C7D50824C234E90068941E;
-			remoteInfo = LivetexCore;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		61C7D55124C239B20068941E /* Embed Frameworks */ = {
@@ -59,7 +49,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				61A91AA424C8B60A0084DF2F /* LivetexCore.framework in Embed Frameworks */,
+				61FE188624D07ABA00BF90F6 /* LivetexCore.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,9 +89,9 @@
 		618B623624B3860B00CD46BB /* FollowTextMessageSizeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTextMessageSizeCalculator.swift; sourceTree = "<group>"; };
 		618B623824B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTextMessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		618B623A24B3C35700CD46BB /* MessageInputBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputBarView.swift; sourceTree = "<group>"; };
-		61A91A9D24C8B6030084DF2F /* LivetexCore.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = LivetexCore.xcodeproj; path = LivetexCore/LivetexCore.xcodeproj; sourceTree = "<group>"; };
 		61D693A824BBBFC90070B3D7 /* LivetexMessaging.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = LivetexMessaging.entitlements; sourceTree = "<group>"; };
 		61F0308B24A3E4F1006FF160 /* DebouncedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebouncedFunction.swift; sourceTree = "<group>"; };
+		61FE188424D07ABA00BF90F6 /* LivetexCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LivetexCore.xcframework; path = LivetexCore/LivetexCore.xcframework; sourceTree = "<group>"; };
 		6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LivetexMessaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D93B122FDADFB26DE38B9D86 /* Pods-LivetexMessaging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivetexMessaging.debug.xcconfig"; path = "Target Support Files/Pods-LivetexMessaging/Pods-LivetexMessaging.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,8 +101,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61FE188524D07ABA00BF90F6 /* LivetexCore.xcframework in Frameworks */,
 				156A44ADDAA1BF38B1BE28D4 /* Pods_LivetexMessaging.framework in Frameworks */,
-				61A91AA324C8B60A0084DF2F /* LivetexCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,7 +121,6 @@
 		6125A10C2474716B00A92C0D = {
 			isa = PBXGroup;
 			children = (
-				61A91A9D24C8B6030084DF2F /* LivetexCore.xcodeproj */,
 				6125A1172474716B00A92C0D /* LivetexMessaging */,
 				6125A1162474716B00A92C0D /* Products */,
 				CF939B5E615AC1797200BF3E /* Pods */,
@@ -289,17 +278,10 @@
 			path = Data;
 			sourceTree = "<group>";
 		};
-		61A91A9E24C8B6030084DF2F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				61A91AA224C8B6030084DF2F /* LivetexCore.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		9A024361532872214D07A071 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				61FE188424D07ABA00BF90F6 /* LivetexCore.xcframework */,
 				6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */,
 			);
 			name = Frameworks;
@@ -363,28 +345,12 @@
 			mainGroup = 6125A10C2474716B00A92C0D;
 			productRefGroup = 6125A1162474716B00A92C0D /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 61A91A9E24C8B6030084DF2F /* Products */;
-					ProjectRef = 61A91A9D24C8B6030084DF2F /* LivetexCore.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				6125A1142474716B00A92C0D /* LivetexMessaging */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		61A91AA224C8B6030084DF2F /* LivetexCore.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = LivetexCore.framework;
-			remoteRef = 61A91AA124C8B6030084DF2F /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		6125A1132474716B00A92C0D /* Resources */ = {
