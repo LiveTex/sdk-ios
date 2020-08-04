@@ -16,6 +16,7 @@ extension ClientEvent {
         case value
         case offset
         case content
+        case payload
         case messageId
         case correlationId
     }

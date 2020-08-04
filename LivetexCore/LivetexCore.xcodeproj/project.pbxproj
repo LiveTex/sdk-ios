@@ -34,6 +34,7 @@
 		61C7D54B24C2354A0068941E /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7D53224C2354A0068941E /* Endpoint.swift */; };
 		61C7D54C24C2354A0068941E /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7D53324C2354A0068941E /* WebSocket.swift */; };
 		61C7D5AF24C46C2F0068941E /* LivetexAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C7D5AE24C46C2F0068941E /* LivetexAuthService.swift */; };
+		61FE189024D0817F00BF90F6 /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FE188F24D0817F00BF90F6 /* Keyboard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		61C7D53224C2354A0068941E /* Endpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		61C7D53324C2354A0068941E /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		61C7D5AE24C46C2F0068941E /* LivetexAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivetexAuthService.swift; sourceTree = "<group>"; };
+		61FE188F24D0817F00BF90F6 /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,24 +120,24 @@
 		61C7D51624C235490068941E /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				61C7D52724C235490068941E /* ClientEvent */,
 				61C7D52024C235490068941E /* Message */,
 				61C7D54D24C237D10068941E /* Models */,
-				61C7D52724C235490068941E /* Request */,
-				61C7D51924C235490068941E /* Response */,
+				61C7D51924C235490068941E /* ServiceEvent */,
 				61C7D52D24C2354A0068941E /* Services */,
 				61C7D53324C2354A0068941E /* WebSocket.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
 		};
-		61C7D51924C235490068941E /* Response */ = {
+		61C7D51924C235490068941E /* ServiceEvent */ = {
 			isa = PBXGroup;
 			children = (
 				61C7D51C24C235490068941E /* ServiceEvent.swift */,
 				61C7D51A24C235490068941E /* ServiceEvent+Keys.swift */,
 				61C7D51B24C235490068941E /* ServiceEvent+Type.swift */,
 			);
-			path = Response;
+			path = ServiceEvent;
 			sourceTree = "<group>";
 		};
 		61C7D52024C235490068941E /* Message */ = {
@@ -149,7 +151,7 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
-		61C7D52724C235490068941E /* Request */ = {
+		61C7D52724C235490068941E /* ClientEvent */ = {
 			isa = PBXGroup;
 			children = (
 				61C7D52924C235490068941E /* ClientEvent.swift */,
@@ -157,7 +159,7 @@
 				61C7D52B24C235490068941E /* ClientEvent+Keys.swift */,
 				61C7D52A24C235490068941E /* ClientEvent+Type.swift */,
 			);
-			path = Request;
+			path = ClientEvent;
 			sourceTree = "<group>";
 		};
 		61C7D52D24C2354A0068941E /* Services */ = {
@@ -179,6 +181,7 @@
 				61C7D52524C235490068941E /* Department.swift */,
 				61C7D52624C235490068941E /* Employee.swift */,
 				61C7D53224C2354A0068941E /* Endpoint.swift */,
+				61FE188F24D0817F00BF90F6 /* Keyboard.swift */,
 				6160344024C6CA530053002E /* LTError.swift */,
 				61C7D52C24C235490068941E /* ResultMessage.swift */,
 				61C7D52F24C2354A0068941E /* SessionToken.swift */,
@@ -285,6 +288,7 @@
 				61C7D53624C2354A0068941E /* ServiceEvent+Keys.swift in Sources */,
 				61C7D53924C2354A0068941E /* Attributes.swift in Sources */,
 				61C7D53E24C2354A0068941E /* MessageType.swift in Sources */,
+				61FE189024D0817F00BF90F6 /* Keyboard.swift in Sources */,
 				61C7D54524C2354A0068941E /* ClientEvent+Keys.swift in Sources */,
 				61C7D53F24C2354A0068941E /* MessageItem.swift in Sources */,
 				61C7D54024C2354A0068941E /* Department.swift in Sources */,

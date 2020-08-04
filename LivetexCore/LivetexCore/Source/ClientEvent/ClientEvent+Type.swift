@@ -16,6 +16,7 @@ public extension ClientEvent {
         case attributes
         case department
         case getHistory
+        case buttonPressed
     }
 
 }

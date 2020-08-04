@@ -19,4 +19,7 @@ enum Asset: String {
     case camera = "camera"
     case document = "document"
     case cancel = "cancel"
+    case buttonDefault = "button_default"
+    case shadowBackground = "shadow_background"
+    case defaultBackground = "default_background"
 }

@@ -23,6 +23,7 @@ extension ChatViewModel {
         var sentDate: Date
         var kind: MessageKind
         var creator: Creator
+        var keyboard: Keyboard?
 
         // MARK: - Hashable
 

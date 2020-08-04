@@ -20,5 +20,6 @@ public struct Creator: Codable {
         case visitor
         case employee
         case system
+        case bot
     }
 }

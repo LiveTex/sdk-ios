@@ -11,9 +11,9 @@ import MessageKit
 
 class CustomMessagesFlowLayout: MessagesCollectionViewFlowLayout {
 
-    lazy var followTextMessageSizeCalculator = FollowTextMessageSizeCalculator(layout: self)
-    lazy var customTextMessageSizeCalculator = CustomTextMessageSizeCalculator(layout: self)
-    lazy var systemMessageSizeCalculator = SystemMessageSizeCalculator(layout: self)
+    private lazy var followTextMessageSizeCalculator = FollowTextMessageSizeCalculator(layout: self)
+    private lazy var customTextMessageSizeCalculator = CustomTextMessageSizeCalculator(layout: self)
+    private lazy var systemMessageSizeCalculator = SystemMessageSizeCalculator(layout: self)
 
     override class var layoutAttributesClass: AnyClass {
         return CustomMessagesCollectionViewLayoutAttributes.self

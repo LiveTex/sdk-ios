@@ -167,7 +167,8 @@ class ChatViewModel {
                                messageId: $0.id,
                                sentDate: $0.createdAt,
                                kind: kind,
-                               creator: $0.creator)
+                               creator: $0.creator,
+                               keyboard: $0.keyboard)
         }
     }
 

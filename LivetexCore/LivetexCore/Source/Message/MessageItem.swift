@@ -18,6 +18,8 @@ protocol MessageItem {
 
     var createdAt: Date { get }
 
+    var keyboard: Keyboard? { get }
+
     var content: MessageContent { get }
 
 }

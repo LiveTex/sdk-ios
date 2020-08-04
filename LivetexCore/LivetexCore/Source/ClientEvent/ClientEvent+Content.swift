@@ -18,6 +18,7 @@ public extension ClientEvent {
         case department(String)
         case getHistory(String, Int)
         case attributes(Attributes)
+        case buttonPressed(String)
 
         // MARK: - Encoding
 
@@ -46,6 +47,9 @@ public extension ClientEvent {
             case let .department(content):
                 try container.encode(ClientEvent.EventType.department, forKey: .type)
                 try container.encode(content, forKey: .id)
+            case let .buttonPressed(content):
+                try container.encode(ClientEvent.EventType.buttonPressed, forKey: .type)
+                try container.encode(content, forKey: .payload)
             }
         }
     }

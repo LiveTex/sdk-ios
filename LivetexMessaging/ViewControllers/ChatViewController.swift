@@ -14,7 +14,7 @@ import SafariServices
 import BFRImageViewer
 import LivetexCore
 
-class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate {
+class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate, UIGestureRecognizerDelegate {
 
     private let titleView = TitleView()
 
@@ -194,6 +194,8 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         messagesCollectionView.register(TextMessageCollectionViewCell.self)
         messagesCollectionView.register(SystemMessageCollectionViewCell.self)
         messagesCollectionView.register(FollowTextMessageCollectionViewCell.self)
+        messagesCollectionView.register(ActionsReusableView.self,
+                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter)
         messagesCollectionView.delegate = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesDataSource = self
@@ -372,6 +374,23 @@ extension ChatViewController: MessagesDataSource {
         return NSAttributedString(string: message.sender.displayName,
                                   attributes: [.font: UIFont.preferredFont(forTextStyle: .caption1)])
     }
+
+    func messageFooterView(for indexPath: IndexPath,
+                           in messagesCollectionView: MessagesCollectionView) -> MessageReusableView {
+        let message = viewModel.messages[indexPath.section]
+        guard let keyboard = message.keyboard else {
+            return MessageReusableView()
+        }
+
+        let view = messagesCollectionView.dequeueReusableFooterView(ActionsReusableView.self, for: indexPath)
+        view.configure(with: keyboard)
+        view.onAction = { [weak self] button in
+            self?.viewModel.sendEvent(ClientEvent(.buttonPressed(button.payload)))
+        }
+
+        return view
+    }
+
 }
 
 extension ChatViewController: UIContextMenuInteractionDelegate {
@@ -512,6 +531,15 @@ extension ChatViewController: MessagesLayoutDelegate {
                                at indexPath: IndexPath,
                                in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return isFromCurrentSender(message: message) ? 0 : 20
+    }
+
+    func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+        guard let keyboard = viewModel.messages[section].keyboard, !keyboard.buttons.isEmpty,
+              let layout = messagesCollectionView.collectionViewLayout as? CustomMessagesFlowLayout else {
+            return .zero
+        }
+
+        return CGSize(width: layout.itemWidth, height: ActionsReusableView.viewHeight(for: keyboard))
     }
 
 }
