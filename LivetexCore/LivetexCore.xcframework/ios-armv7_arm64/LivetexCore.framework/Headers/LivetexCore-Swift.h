@@ -213,7 +213,6 @@ enum WebSocketReadyState : NSInteger;
 /// WebSocket objects are bidirectional network streams that communicate over HTTP. RFC 6455.
 SWIFT_CLASS("_TtC11LivetexCore9WebSocket")
 @interface WebSocket : NSObject
-@property (nonatomic) BOOL opened;
 @property (nonatomic, readonly) NSUInteger hash;
 - (BOOL)isEqual:(id _Nullable)other SWIFT_WARN_UNUSED_RESULT;
 /// Create a WebSocket connection to a URL; this should be the URL to which the WebSocket server will respond.
@@ -530,7 +529,6 @@ enum WebSocketReadyState : NSInteger;
 /// WebSocket objects are bidirectional network streams that communicate over HTTP. RFC 6455.
 SWIFT_CLASS("_TtC11LivetexCore9WebSocket")
 @interface WebSocket : NSObject
-@property (nonatomic) BOOL opened;
 @property (nonatomic, readonly) NSUInteger hash;
 - (BOOL)isEqual:(id _Nullable)other SWIFT_WARN_UNUSED_RESULT;
 /// Create a WebSocket connection to a URL; this should be the URL to which the WebSocket server will respond.

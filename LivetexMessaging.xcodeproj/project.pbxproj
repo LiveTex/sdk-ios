@@ -21,6 +21,8 @@
 		6125A1502474748E00A92C0D /* DateFormatter+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A1402474748E00A92C0D /* DateFormatter+Factory.swift */; };
 		6125A15E2474760B00A92C0D /* ChatViewModel+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A15C2474760B00A92C0D /* ChatViewModel+Messages.swift */; };
 		6125A15F2474760B00A92C0D /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6125A15D2474760B00A92C0D /* ChatViewModel.swift */; };
+		613D42A424DC470A009C5CFC /* LivetexCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 613D42A324DC470A009C5CFC /* LivetexCore.xcframework */; };
+		613D42A524DC470A009C5CFC /* LivetexCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 613D42A324DC470A009C5CFC /* LivetexCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		6167342B248B960600A6930F /* UIAlertController+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6167342A248B960600A6930F /* UIAlertController+Factory.swift */; };
 		6167342E248BA64400A6930F /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6167342D248BA64400A6930F /* UIColor+Hex.swift */; };
 		61673430248BA66000A6930F /* UIColor+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6167342F248BA66000A6930F /* UIColor+Factory.swift */; };
@@ -38,8 +40,6 @@
 		618B623924B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B623824B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift */; };
 		618B623B24B3C35700CD46BB /* MessageInputBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B623A24B3C35700CD46BB /* MessageInputBarView.swift */; };
 		61F0308C24A3E4F1006FF160 /* DebouncedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0308B24A3E4F1006FF160 /* DebouncedFunction.swift */; };
-		61FE188524D07ABA00BF90F6 /* LivetexCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61FE188424D07ABA00BF90F6 /* LivetexCore.xcframework */; };
-		61FE188624D07ABA00BF90F6 /* LivetexCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 61FE188424D07ABA00BF90F6 /* LivetexCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -49,7 +49,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				61FE188624D07ABA00BF90F6 /* LivetexCore.xcframework in Embed Frameworks */,
+				613D42A524DC470A009C5CFC /* LivetexCore.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,6 +73,7 @@
 		6125A1402474748E00A92C0D /* DateFormatter+Factory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Factory.swift"; sourceTree = "<group>"; };
 		6125A15C2474760B00A92C0D /* ChatViewModel+Messages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatViewModel+Messages.swift"; sourceTree = "<group>"; };
 		6125A15D2474760B00A92C0D /* ChatViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		613D42A324DC470A009C5CFC /* LivetexCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LivetexCore.xcframework; path = LivetexCore/LivetexCore.xcframework; sourceTree = "<group>"; };
 		6167342A248B960600A6930F /* UIAlertController+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Factory.swift"; sourceTree = "<group>"; };
 		6167342D248BA64400A6930F /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		6167342F248BA66000A6930F /* UIColor+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Factory.swift"; sourceTree = "<group>"; };
@@ -91,7 +92,6 @@
 		618B623A24B3C35700CD46BB /* MessageInputBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputBarView.swift; sourceTree = "<group>"; };
 		61D693A824BBBFC90070B3D7 /* LivetexMessaging.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = LivetexMessaging.entitlements; sourceTree = "<group>"; };
 		61F0308B24A3E4F1006FF160 /* DebouncedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebouncedFunction.swift; sourceTree = "<group>"; };
-		61FE188424D07ABA00BF90F6 /* LivetexCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LivetexCore.xcframework; path = LivetexCore/LivetexCore.xcframework; sourceTree = "<group>"; };
 		6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LivetexMessaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D93B122FDADFB26DE38B9D86 /* Pods-LivetexMessaging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivetexMessaging.debug.xcconfig"; path = "Target Support Files/Pods-LivetexMessaging/Pods-LivetexMessaging.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,7 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61FE188524D07ABA00BF90F6 /* LivetexCore.xcframework in Frameworks */,
+				613D42A424DC470A009C5CFC /* LivetexCore.xcframework in Frameworks */,
 				156A44ADDAA1BF38B1BE28D4 /* Pods_LivetexMessaging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,7 +281,7 @@
 		9A024361532872214D07A071 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				61FE188424D07ABA00BF90F6 /* LivetexCore.xcframework */,
+				613D42A324DC470A009C5CFC /* LivetexCore.xcframework */,
 				6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */,
 			);
 			name = Frameworks;
