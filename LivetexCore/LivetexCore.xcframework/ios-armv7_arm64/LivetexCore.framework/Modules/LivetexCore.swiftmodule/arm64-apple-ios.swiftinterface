@@ -168,7 +168,6 @@ public enum WebSocketError : Swift.Error, Swift.CustomStringConvertible {
   @objc optional func webSocketEnd(_ code: Swift.Int, reason: Swift.String, wasClean: Swift.Bool, error: Foundation.NSError?)
 }
 @objc @_inheritsConvenienceInitializers @objcMembers open class WebSocket : ObjectiveC.NSObject {
-  @objc public var opened: Swift.Bool
   @objc override dynamic open var hash: Swift.Int {
     @objc get
   }
