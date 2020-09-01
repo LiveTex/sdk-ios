@@ -9,9 +9,7 @@ iOS SDK и демо-приложение для нового VisitorAPI
 <key>Livetex</key>
 <dict>
     <key>LivetexAppID</key>
-    <dict>
-        <key>touchPoint</key>
-    </dict>
+    <string>touchPoint</string>
 </dict>
 ```
 # Использование
