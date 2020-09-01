@@ -55,7 +55,7 @@ class ChatViewModel {
 
     private func requestAuthentication(deviceToken: String) {
         let loginService = LivetexAuthService(token: settings.visitorToken.map { .system($0) },
-                                               deviceToken: deviceToken)
+                                              deviceToken: deviceToken)
 
         loginService.requestAuthorization { [weak self] result in
             DispatchQueue.main.async {
