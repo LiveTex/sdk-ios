@@ -87,7 +87,8 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
                 return
             }
 
-            guard departments.count > 1 else {
+            let minDepartments = 1
+            guard departments.count > minDepartments else {
                 self.viewModel.sendEvent(ClientEvent(.department(departments.first?.id ?? "")))
                 return
             }
@@ -108,6 +109,12 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
         viewModel.onLoadMoreMessages = { [weak self] newMessages in
             self?.viewModel.messages.insert(contentsOf: newMessages, at: 0)
             self?.messagesCollectionView.reloadDataAndKeepOffset()
+        }
+
+        viewModel.onMessageUpdated = { [weak self] index in
+            self?.messagesCollectionView.performBatchUpdates({
+                self?.messagesCollectionView.reloadSections(IndexSet(integer: index))
+            }, completion: nil)
         }
 
         viewModel.onMessagesReceived = { [weak self] newMessages in
@@ -201,6 +208,8 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messagesCollectionView.gestureRecognizers?.filter { $0 is UITapGestureRecognizer }
+            .forEach { $0.delaysTouchesBegan = false }
 
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         layout?.sectionInset = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
@@ -546,7 +555,8 @@ extension ChatViewController: MessagesLayoutDelegate {
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.originalImage] as? UIImage,
               let data = image.jpegData(compressionQuality: 0.5) else {
             picker.dismiss(animated: true)
@@ -570,11 +580,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 extension ChatViewController: UIDocumentPickerDelegate {
 
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let url = urls.first, let data = try? Data(contentsOf: url) else {
+        guard let url = urls.first, let _ = try? Data(contentsOf: url) else {
             return
         }
-
-        
     }
 
 }

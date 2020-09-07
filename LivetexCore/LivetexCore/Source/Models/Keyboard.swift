@@ -11,6 +11,13 @@ import UIKit
 public struct Keyboard: Decodable {
     public let buttons: [Button]
     public let pressed: Bool
+
+    // MARK: - Initialization
+
+    public init(buttons: [Button], pressed: Bool) {
+        self.buttons = buttons
+        self.pressed = pressed
+    }
 }
 
 public struct Button: Decodable {

@@ -15,6 +15,7 @@ class ChatViewModel {
     var onDepartmentReceived: (([Department]) -> Void)?
     var onLoadMoreMessages: (([ChatMessage]) -> Void)?
     var onMessagesReceived: (([ChatMessage]) -> Void)?
+    var onMessageUpdated: ((Int) -> Void)?
     var onDialogStateReceived: ((Conversation) -> Void)?
     var onAttributesReceived: (() -> Void)?
     var onTypingReceived: (() -> Void)?
@@ -55,7 +56,7 @@ class ChatViewModel {
 
     private func requestAuthentication(deviceToken: String) {
         let loginService = LivetexAuthService(token: settings.visitorToken.map { .system($0) },
-                                               deviceToken: deviceToken)
+                                              deviceToken: deviceToken)
 
         loginService.requestAuthorization { [weak self] result in
             DispatchQueue.main.async {
@@ -113,6 +114,8 @@ class ChatViewModel {
         }
 
         sessionService?.sendEvent(event)
+
+        updateMessageIfNeeded(event: event)
     }
 
     private func didReceive(event: ServiceEvent) {
@@ -130,7 +133,24 @@ class ChatViewModel {
             messageHistoryReceived(items: result.messages)
         case .employeeTyping:
             onTypingReceived?()
+        @unknown default:
+            break
         }
+    }
+
+    private func updateMessageIfNeeded(event: ClientEvent) {
+        guard case .buttonPressed = event.content,
+              let index = messages.lastIndex(where: { $0.keyboard != nil }),
+              !messages.isEmpty, let keyboard = messages[index].keyboard else {
+            return
+        }
+
+        var message = messages[index]
+        message.keyboard = Keyboard(buttons: keyboard.buttons, pressed: true)
+        messages.remove(at: index)
+        messages.insert(message, at: index)
+
+        onMessageUpdated?(index)
     }
 
     func isPreviousMessageSameDate(at index: Int) -> Bool {
@@ -161,6 +181,8 @@ class ChatViewModel {
                 }
             case let .file(attachment):
                 kind = .photo(File(url: attachment.url))
+            @unknown default:
+                kind = .text("")
             }
 
             return ChatMessage(sender: sender,

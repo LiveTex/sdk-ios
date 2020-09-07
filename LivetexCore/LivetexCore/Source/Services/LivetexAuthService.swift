@@ -13,7 +13,7 @@ public enum Token {
     case custom(String)
 }
 
-private let authPath = "https://visitor-auth-04.livetex.ru/v1/auth" //"https://visitor-api-04.livetex.ru/v1/auth"
+private let authPath = "https://visitor-api.livetex.ru/v1/auth"
 
 public class LivetexAuthService {
 

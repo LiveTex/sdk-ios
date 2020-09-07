@@ -144,6 +144,7 @@ public class LivetexSessionService: WebSocketDelegate {
         var request = URLRequest(url: requestURL)
         request.httpMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(token.visitorToken)", forHTTPHeaderField: "Authorization")
         var uploadData = Data()
         uploadData.append("\r\n--\(boundary)\r\n".data(using: .utf8) ?? Data())
         uploadData.append("Content-Disposition: form-data; name=\"fileUpload\"; filename=\"\(fileName)\"\r\n".data(using: .utf8) ?? Data())
