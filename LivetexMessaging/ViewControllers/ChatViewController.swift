@@ -14,7 +14,7 @@ import SafariServices
 import BFRImageViewer
 import LivetexCore
 
-class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate {
+class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate, UIGestureRecognizerDelegate {
 
     private let titleView = TitleView()
 
@@ -87,7 +87,8 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
                 return
             }
 
-            guard departments.count > 1 else {
+            let minDepartments = 1
+            guard departments.count > minDepartments else {
                 self.viewModel.sendEvent(ClientEvent(.department(departments.first?.id ?? "")))
                 return
             }
@@ -108,6 +109,12 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         viewModel.onLoadMoreMessages = { [weak self] newMessages in
             self?.viewModel.messages.insert(contentsOf: newMessages, at: 0)
             self?.messagesCollectionView.reloadDataAndKeepOffset()
+        }
+
+        viewModel.onMessageUpdated = { [weak self] index in
+            self?.messagesCollectionView.performBatchUpdates({
+                self?.messagesCollectionView.reloadSections(IndexSet(integer: index))
+            }, completion: nil)
         }
 
         viewModel.onMessagesReceived = { [weak self] newMessages in
@@ -194,11 +201,15 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         messagesCollectionView.register(TextMessageCollectionViewCell.self)
         messagesCollectionView.register(SystemMessageCollectionViewCell.self)
         messagesCollectionView.register(FollowTextMessageCollectionViewCell.self)
+        messagesCollectionView.register(ActionsReusableView.self,
+                                        forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter)
         messagesCollectionView.delegate = self
         messagesCollectionView.messageCellDelegate = self
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messagesCollectionView.gestureRecognizers?.filter { $0 is UITapGestureRecognizer }
+            .forEach { $0.delaysTouchesBegan = false }
 
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         layout?.sectionInset = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
@@ -372,6 +383,23 @@ extension ChatViewController: MessagesDataSource {
         return NSAttributedString(string: message.sender.displayName,
                                   attributes: [.font: UIFont.preferredFont(forTextStyle: .caption1)])
     }
+
+    func messageFooterView(for indexPath: IndexPath,
+                           in messagesCollectionView: MessagesCollectionView) -> MessageReusableView {
+        let message = viewModel.messages[indexPath.section]
+        guard let keyboard = message.keyboard else {
+            return MessageReusableView()
+        }
+
+        let view = messagesCollectionView.dequeueReusableFooterView(ActionsReusableView.self, for: indexPath)
+        view.configure(with: keyboard)
+        view.onAction = { [weak self] button in
+            self?.viewModel.sendEvent(ClientEvent(.buttonPressed(button.payload)))
+        }
+
+        return view
+    }
+
 }
 
 extension ChatViewController: UIContextMenuInteractionDelegate {
@@ -514,11 +542,21 @@ extension ChatViewController: MessagesLayoutDelegate {
         return isFromCurrentSender(message: message) ? 0 : 20
     }
 
+    func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
+        guard let keyboard = viewModel.messages[section].keyboard, !keyboard.buttons.isEmpty,
+              let layout = messagesCollectionView.collectionViewLayout as? CustomMessagesFlowLayout else {
+            return .zero
+        }
+
+        return CGSize(width: layout.itemWidth, height: ActionsReusableView.viewHeight(for: keyboard))
+    }
+
 }
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.originalImage] as? UIImage,
               let data = image.jpegData(compressionQuality: 0.5) else {
             picker.dismiss(animated: true)
@@ -542,11 +580,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 extension ChatViewController: UIDocumentPickerDelegate {
 
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let url = urls.first, let data = try? Data(contentsOf: url) else {
+        guard let url = urls.first, let _ = try? Data(contentsOf: url) else {
             return
         }
-
-        
     }
 
 }

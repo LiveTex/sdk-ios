@@ -14,6 +14,7 @@ public struct Message: MessageItem, Decodable {
     public let content: MessageContent
     public let creator: Creator
     public let createdAt: Date
+    public let keyboard: Keyboard?
 
     // MARK: - Initialization
 
@@ -24,6 +25,7 @@ public struct Message: MessageItem, Decodable {
         content = try MessageContent(from: decoder)
         creator = try container.decode(Creator.self, forKey: .creator)
         createdAt = try container.decode(Date.self, forKey: .createdAt)
+        keyboard = try? container.decode(Keyboard.self, forKey: .keyboard)
     }
 }
 
@@ -34,6 +36,7 @@ extension Message {
         case type
         case creator
         case createdAt
+        case keyboard
         case content
         case name
         case url
