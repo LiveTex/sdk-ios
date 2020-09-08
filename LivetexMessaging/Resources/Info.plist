@@ -26,9 +26,9 @@
 		<string>168:58dc121d-9b8f-4d31-b142-7b11de675690</string>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Приложение запрашивает доступ к камере</string>
+	<string>Приложение запрашивает доступ к камере для возможности сделать и отправить фотографию через чат</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Приложение запрашивает достук к галерее</string>
+	<string>Приложение запрашивает достук к галерее для возможности отправить фотографию через чат</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
