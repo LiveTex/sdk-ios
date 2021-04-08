@@ -47,6 +47,11 @@ class ChatViewModel {
                                                object: nil)
 
         NotificationCenter.default.addObserver(self,
+                                               selector: #selector(applicationDidEnterBackground),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil)
+
+        NotificationCenter.default.addObserver(self,
                                                selector: #selector(applicationDidRegisterForRemoteNotifications(_:)),
                                                name: UIApplication.didRegisterForRemoteNotifications,
                                                object: nil)
