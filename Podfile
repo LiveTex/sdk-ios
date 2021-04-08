@@ -8,5 +8,6 @@ target 'LivetexMessaging' do
   pod 'MessageKit'
   pod 'Kingfisher'
   pod 'BFRImageViewer'
+  pod 'PINRemoteImage', '~> 3.0.3'
 
 end
