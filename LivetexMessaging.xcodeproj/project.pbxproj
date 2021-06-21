@@ -37,8 +37,8 @@
 		618B623724B3860B00CD46BB /* FollowTextMessageSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B623624B3860B00CD46BB /* FollowTextMessageSizeCalculator.swift */; };
 		618B623924B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B623824B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift */; };
 		618B623B24B3C35700CD46BB /* MessageInputBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 618B623A24B3C35700CD46BB /* MessageInputBarView.swift */; };
-		61AC18DD250240AF006F3942 /* LivetexCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61AC18DA2502408E006F3942 /* LivetexCore.xcframework */; };
-		61AC18DE250240AF006F3942 /* LivetexCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 61AC18DA2502408E006F3942 /* LivetexCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		61A23ACC2680811D00C39840 /* LivetexCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61A23ACB2680811D00C39840 /* LivetexCore.xcframework */; };
+		61A23ACD2680811D00C39840 /* LivetexCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 61A23ACB2680811D00C39840 /* LivetexCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		61F0308C24A3E4F1006FF160 /* DebouncedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0308B24A3E4F1006FF160 /* DebouncedFunction.swift */; };
 		61FE189424D0886500BF90F6 /* ActionsReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FE189324D0886500BF90F6 /* ActionsReusableView.swift */; };
 /* End PBXBuildFile section */
@@ -50,7 +50,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				61AC18DE250240AF006F3942 /* LivetexCore.xcframework in Embed Frameworks */,
+				61A23ACD2680811D00C39840 /* LivetexCore.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -90,7 +90,7 @@
 		618B623624B3860B00CD46BB /* FollowTextMessageSizeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTextMessageSizeCalculator.swift; sourceTree = "<group>"; };
 		618B623824B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowTextMessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		618B623A24B3C35700CD46BB /* MessageInputBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInputBarView.swift; sourceTree = "<group>"; };
-		61AC18DA2502408E006F3942 /* LivetexCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LivetexCore.xcframework; path = LivetexCore/LivetexCore.xcframework; sourceTree = "<group>"; };
+		61A23ACB2680811D00C39840 /* LivetexCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = LivetexCore.xcframework; path = LivetexCore/LivetexCore.xcframework; sourceTree = "<group>"; };
 		61D693A824BBBFC90070B3D7 /* LivetexMessaging.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = LivetexMessaging.entitlements; sourceTree = "<group>"; };
 		61F0308B24A3E4F1006FF160 /* DebouncedFunction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DebouncedFunction.swift; sourceTree = "<group>"; };
 		61FE189324D0886500BF90F6 /* ActionsReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsReusableView.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61AC18DD250240AF006F3942 /* LivetexCore.xcframework in Frameworks */,
+				61A23ACC2680811D00C39840 /* LivetexCore.xcframework in Frameworks */,
 				156A44ADDAA1BF38B1BE28D4 /* Pods_LivetexMessaging.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,7 +284,7 @@
 		9A024361532872214D07A071 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				61AC18DA2502408E006F3942 /* LivetexCore.xcframework */,
+				61A23ACB2680811D00C39840 /* LivetexCore.xcframework */,
 				6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */,
 			);
 			name = Frameworks;
