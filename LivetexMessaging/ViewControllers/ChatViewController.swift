@@ -17,13 +17,9 @@ import LivetexCore
 class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate, UIGestureRecognizerDelegate {
 
     private let titleView = TitleView()
-
     private let avatarView = OperatorAvatarView()
-
     private let viewModel = ChatViewModel()
-
     private let estimationView = EstimationView()
-
     private let messageInputBarView = MessageInputBarView()
 
     private lazy var typingFunction = DebouncedFunction(timeInterval: 2) { [weak self] in
@@ -154,6 +150,19 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
 
             UIView.animate(withDuration: 0.5) {
                 self?.layoutEstimationView()
+            } completion: { _ in
+                guard let self = self else {
+                    return
+                }
+
+                if self.messageInputBarView.superview == nil {
+                    self.view.addSubview(self.messageInputBarView)
+                    self.reloadInputViews()
+
+                    DispatchQueue.main.async {
+                        self.messageInputBarView.inputTextView.becomeFirstResponder()
+                    }
+                }
             }
         }
 
