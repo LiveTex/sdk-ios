@@ -38,15 +38,27 @@ public extension ClientEvent {
                 try container.encode(ClientEvent.EventType.typing, forKey: .type)
                 try container.encode(content, forKey: .content)
             case let .getHistory(id, offset):
+                if id.isEmpty {
+                    let context = EncodingError.Context(codingPath: container.codingPath,
+                                                        debugDescription: "Value is empty")
+                    throw EncodingError.invalidValue(id, context)
+                } else {
+                    try container.encode(id, forKey: .messageId)
+                }
                 try container.encode(ClientEvent.EventType.getHistory, forKey: .type)
-                try container.encode(id, forKey: .messageId)
                 try container.encode(offset, forKey: .offset)
             case let .attributes(content):
                 try container.encode(ClientEvent.EventType.attributes, forKey: .type)
                 try content.encode(to: encoder)
-            case let .department(content):
+            case let .department(id):
+                if id.isEmpty {
+                    let context = EncodingError.Context(codingPath: container.codingPath,
+                                                        debugDescription: "Value is empty")
+                    throw EncodingError.invalidValue(id, context)
+                } else {
+                    try container.encode(id, forKey: .id)
+                }
                 try container.encode(ClientEvent.EventType.department, forKey: .type)
-                try container.encode(content, forKey: .id)
             case let .buttonPressed(content):
                 try container.encode(ClientEvent.EventType.buttonPressed, forKey: .type)
                 try container.encode(content, forKey: .payload)

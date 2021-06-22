@@ -998,8 +998,13 @@ private class InnerWebSocket: Hashable {
             req.setValue("\(req.url!.host!):\(req.url!.port!)", forHTTPHeaderField: "Host")
         }
         let origin = req.value(forHTTPHeaderField: "Origin")
-        if origin == nil || origin! == ""{
-            req.setValue(req.url!.absoluteString, forHTTPHeaderField: "Origin")
+        if origin == nil || origin! == "" {
+            var absoluteString = req.url!.absoluteString
+            let relativePath = req.url!.relativePath
+            if absoluteString.hasSuffix(relativePath) {
+                absoluteString = String(absoluteString.dropLast(relativePath.count))
+            }
+            req.setValue(absoluteString, forHTTPHeaderField: "Origin")
         }
         if subProtocols.count > 0 {
             req.setValue(subProtocols.joined(separator: ","), forHTTPHeaderField: "Sec-WebSocket-Protocol")

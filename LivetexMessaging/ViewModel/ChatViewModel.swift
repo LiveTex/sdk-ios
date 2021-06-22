@@ -86,11 +86,11 @@ class ChatViewModel {
     }
 
     func loadMoreMessagesIfNeeded() {
-        guard isCanLoadMore else {
+        guard isCanLoadMore, let id = messages.first?.messageId, !id.isEmpty else {
             return
         }
 
-        let event = ClientEvent(.getHistory(messages.first?.messageId ?? "", loadMoreOffset))
+        let event = ClientEvent(.getHistory(id, loadMoreOffset))
         sessionService?.sendEvent(event)
         isLoadingMore = true
     }
