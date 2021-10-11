@@ -14,7 +14,7 @@ import SafariServices
 import BFRImageViewer
 import LivetexCore
 
-class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate, UIGestureRecognizerDelegate {
+class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate {
 
     private let titleView = TitleView()
     private let avatarView = OperatorAvatarView()
@@ -125,7 +125,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
                     self.viewModel.messages.append(contentsOf: newMessages)
                     self.messagesCollectionView.insertSections(indexSet)
                 }, completion: { _ in
-                    self.messagesCollectionView.scrollToBottom(animated: true)
+                    self.messagesCollectionView.scrollToLastItem(animated: true)
                 })
             }
 
@@ -169,7 +169,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
         viewModel.onTypingReceived = { [weak self] in
             self?.typingFunction.call()
             self?.setTypingIndicatorViewHidden(false, animated: true, completion: { _ in
-                self?.messagesCollectionView.scrollToBottom(animated: true)
+                self?.messagesCollectionView.scrollToLastItem(animated: true)
             })
         }
 
@@ -240,7 +240,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
         layout?.setMessageOutgoingAvatarSize(.zero)
         layout?.setMessageIncomingAvatarSize(CGSize(width: 30, height: 30))
 
-        scrollsToBottomOnKeyboardBeginsEditing = true
+        scrollsToLastItemOnKeyboardBeginsEditing = true
         maintainPositionOnKeyboardFrameChanged = true
     }
 
@@ -306,7 +306,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate,
             return
         }
 
-        messagesCollectionView.scrollToBottom()
+        messagesCollectionView.scrollToLastItem()
         viewModel.sendEvent(ClientEvent(.typing(text)))
     }
 

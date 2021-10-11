@@ -185,13 +185,11 @@
 		6125A1302474732500A92C0D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FF2CB28C2714AB1200287117 /* Custom Cells */,
 				61FE189324D0886500BF90F6 /* ActionsReusableView.swift */,
 				618B621B24ABCEB500CD46BB /* EstimationView.swift */,
-				618B623224B2350100CD46BB /* FollowMessageView.swift */,
-				618B623824B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift */,
 				618B623A24B3C35700CD46BB /* MessageInputBarView.swift */,
 				6125A1322474735500A92C0D /* OperatorAvatarView.swift */,
-				6105876A24967D7500B9CBDF /* SystemMessageCollectionViewCell.swift */,
 				61673433248D1D3A00A6930F /* TextMessageCollectionViewCell.swift */,
 				6125A1332474735500A92C0D /* TitleView.swift */,
 			);
@@ -297,6 +295,24 @@
 				2AACDEDDF06D6BA089F2E005 /* Pods-LivetexMessaging.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		FF2CB28C2714AB1200287117 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6105876A24967D7500B9CBDF /* SystemMessageCollectionViewCell.swift */,
+				FF2CB28D2714AB3300287117 /* FollowMessageCell */,
+			);
+			path = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		FF2CB28D2714AB3300287117 /* FollowMessageCell */ = {
+			isa = PBXGroup;
+			children = (
+				618B623224B2350100CD46BB /* FollowMessageView.swift */,
+				618B623824B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift */,
+			);
+			path = FollowMessageCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,19 +606,19 @@
 				CODE_SIGN_ENTITLEMENTS = LivetexMessaging/LivetexMessaging.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FJE97HEJ7P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LivetexMessaging/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.livetex.mobile.messaging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Livetex Messaging Dev";
@@ -619,19 +635,19 @@
 				CODE_SIGN_ENTITLEMENTS = LivetexMessaging/LivetexMessaging.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1.1.2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = FJE97HEJ7P;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/LivetexMessaging/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.livetex.mobile.messaging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Livetex Messaging Dist";
