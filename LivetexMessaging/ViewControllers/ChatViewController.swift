@@ -14,7 +14,7 @@ import SafariServices
 import BFRImageViewer
 import LivetexCore
 
-class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate, UIGestureRecognizerDelegate {
+class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate {
 
     private let titleView = TitleView()
     private let avatarView = OperatorAvatarView()
