@@ -41,6 +41,7 @@
 		61A23ACD2680811D00C39840 /* LivetexCore.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 61A23ACB2680811D00C39840 /* LivetexCore.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		61F0308C24A3E4F1006FF160 /* DebouncedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61F0308B24A3E4F1006FF160 /* DebouncedFunction.swift */; };
 		61FE189424D0886500BF90F6 /* ActionsReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61FE189324D0886500BF90F6 /* ActionsReusableView.swift */; };
+		FF30F31E27306D8D006EE916 /* UIResponder+First.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF30F31D27306D8D006EE916 /* UIResponder+First.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -96,6 +97,7 @@
 		61FE189324D0886500BF90F6 /* ActionsReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionsReusableView.swift; sourceTree = "<group>"; };
 		6C5EF1AC062AF49B3219BFDC /* Pods_LivetexMessaging.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LivetexMessaging.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D93B122FDADFB26DE38B9D86 /* Pods-LivetexMessaging.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LivetexMessaging.debug.xcconfig"; path = "Target Support Files/Pods-LivetexMessaging/Pods-LivetexMessaging.debug.xcconfig"; sourceTree = "<group>"; };
+		FF30F31D27306D8D006EE916 /* UIResponder+First.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+First.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 		6125A13E2474748E00A92C0D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FF30F31C27306D22006EE916 /* UIResponder */,
 				618B622924AE704600CD46BB /* Data */,
 				6125A13F2474748E00A92C0D /* DateFormatter */,
 				61673429248B95EA00A6930F /* UIAlertController */,
@@ -313,6 +316,14 @@
 				618B623824B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift */,
 			);
 			path = FollowMessageCell;
+			sourceTree = "<group>";
+		};
+		FF30F31C27306D22006EE916 /* UIResponder */ = {
+			isa = PBXGroup;
+			children = (
+				FF30F31D27306D8D006EE916 /* UIResponder+First.swift */,
+			);
+			path = UIResponder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,6 +449,7 @@
 				6167343E248D6FEE00A6930F /* CustomTextMessageSizeCalculator.swift in Sources */,
 				61673439248D48D800A6930F /* CustomMessagesCollectionViewLayoutAttributes.swift in Sources */,
 				6167343C248D63B200A6930F /* UIEdgeInsets+Factory.swift in Sources */,
+				FF30F31E27306D8D006EE916 /* UIResponder+First.swift in Sources */,
 				618B621C24ABCEB500CD46BB /* EstimationView.swift in Sources */,
 				618B623924B3882A00CD46BB /* FollowTextMessageCollectionViewCell.swift in Sources */,
 				618B621E24ABD03300CD46BB /* Assets.swift in Sources */,
@@ -618,7 +630,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.livetex.mobile.messaging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Livetex Messaging Dev";
@@ -647,7 +659,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.1;
+				MARKETING_VERSION = 1.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ru.livetex.mobile.messaging;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "Livetex Messaging Dist";

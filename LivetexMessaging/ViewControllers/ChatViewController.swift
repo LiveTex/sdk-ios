@@ -25,9 +25,17 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
     private lazy var typingFunction = DebouncedFunction(timeInterval: 2) { [weak self] in
         self?.setTypingIndicatorViewHidden(true, animated: true)
     }
+    
+    // Local variable showing input state
+    // onDialogStateReceived dependent
+    private var shouldShowInput: Bool? = true
 
     override var inputAccessoryView: UIView? {
         return messageInputBarView
+    }
+    
+    override var canResignFirstResponder: Bool {
+        true
     }
 
     // MARK: - Lifecycle
@@ -92,6 +100,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
             let actions = departments.map { department in
                 return UIAlertAction(title: department.name, style: .default) { _ in
                     self.viewModel.sendEvent(ClientEvent(.department(department.id)))
+                    self.handleInputStateIfNeeded(shouldShowInput: self.shouldShowInput)
                 }
             }
 
@@ -147,22 +156,11 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
             self?.titleView.title = dialog.employee?.name
             self?.titleView.subtitle = dialog.employeeStatus?.rawValue
             self?.avatarView.setImage(with: URL(string: dialog.employee?.avatarUrl ?? ""))
-
+            self?.shouldShowInput = dialog.showInput
+            self?.handleInputStateIfNeeded(shouldShowInput: dialog.showInput)
+            
             UIView.animate(withDuration: 0.5) {
                 self?.layoutEstimationView()
-            } completion: { _ in
-                guard let self = self else {
-                    return
-                }
-
-                if self.messageInputBarView.superview == nil {
-                    self.view.addSubview(self.messageInputBarView)
-                    self.reloadInputViews()
-
-                    DispatchQueue.main.async {
-                        self.messageInputBarView.inputTextView.becomeFirstResponder()
-                    }
-                }
             }
         }
 
@@ -199,6 +197,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
                                             email: alertController.textFields?[2].text ?? "")
                 self?.viewModel.user.displayName = alertController.textFields?[0].text ?? ""
                 self?.viewModel.sendEvent(ClientEvent(.attributes(attributes)))
+                self?.handleInputStateIfNeeded(shouldShowInput: self?.shouldShowInput)
             }
             alertController.addActions(accept)
             self?.present(alertController, animated: true)
@@ -595,4 +594,30 @@ extension ChatViewController: UIDocumentPickerDelegate {
     }
 
 }
+
+private extension ChatViewController {
+    
+    func handleInputStateIfNeeded(shouldShowInput: Bool?) {
+        if let shouldShowInput = shouldShowInput {
+            if shouldShowInput {
+                becomeFirstResponder()
+            } else {
+                hideInputAccessoryView()
+            }
+        }
+    }
+    
+    func hideInputAccessoryView() {
+        guard let firstResponder = UIResponder.first else {
+            return
+        }
+        
+        firstResponder.resignFirstResponder()
+        hideInputAccessoryView()
+    }
+    
+}
+
+
+
 
