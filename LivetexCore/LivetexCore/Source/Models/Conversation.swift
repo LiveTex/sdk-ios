@@ -13,6 +13,7 @@ public struct Conversation: Decodable {
     public let status: Status
     public let employeeStatus: EmployeeStatus?
     public let employee: Employee?
+    public let showInput: Bool?
 
     public var isEmployeeEstimated: Bool {
         guard let employee = employee else {
