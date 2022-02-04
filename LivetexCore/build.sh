@@ -3,6 +3,7 @@ xcodebuild archive \
   -scheme LivetexCore \
   -sdk iphoneos \
   -archivePath "./iphoneos.xcarchive" \
+  SWIFT_VERSION=5.0 \
   BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
   SKIP_INSTALL=NO
 
@@ -10,6 +11,7 @@ xcodebuild archive \
   -scheme LivetexCore \
   -sdk iphonesimulator \
   -archivePath "./iphonesimulator.xcarchive" \
+  SWIFT_VERSION=5.0 \
   BUILD_LIBRARY_FOR_DISTRIBUTION=YES \
   SKIP_INSTALL=NO
 

@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/LivetexCore-Swift.h</key>
 		<data>
-		hh+cCP23UOgIoOWiZjkg9zPowu4=
+		1LqFkhrTJUGunol++i0oH55hCE4=
 		</data>
 		<key>Headers/LivetexCore.h</key>
 		<data>
@@ -14,79 +14,79 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		XlAC5G57NyU3qbNU2QkFGwiXups=
+		8DHBB6xxsvx7Tx3GrgF6MPxsYuQ=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		qXKgv9d5aQwipIjTXUAzs1ONvms=
+		bdkQKUBKycf7LZAU+YtIiHnCqIg=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		sTQXtjkvKVcjFuCmQBh1Sxc0nqA=
+		YtEJaw1NuoQOQQ1WvWEKwMA1YRM=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		7PL4sqDSuKbcWy4pERg71x60nmA=
+		iI4m3tUcdFtVQA7GWeJIUqMzNsM=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		qXKgv9d5aQwipIjTXUAzs1ONvms=
+		bdkQKUBKycf7LZAU+YtIiHnCqIg=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		sTQXtjkvKVcjFuCmQBh1Sxc0nqA=
+		YtEJaw1NuoQOQQ1WvWEKwMA1YRM=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		7PL4sqDSuKbcWy4pERg71x60nmA=
+		iI4m3tUcdFtVQA7GWeJIUqMzNsM=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<data>
-		kMt5M+AuSavyMIT8BNQmxMV2IvE=
+		Jrt4QrR9RKm2T530Wn12JbXyg2g=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<data>
-		VpdZc/sXtwOcuN9PNC+s9pjoT2Q=
+		7bj8TgJkH1QgRNoXxgDbGMpPujU=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<data>
-		pWCaJ9JthfUF01szejVnAhzaS1E=
+		FnQTDyqbw2/d9JExxh6Wxk2wCrU=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/i386.swiftdoc</key>
 		<data>
-		kMt5M+AuSavyMIT8BNQmxMV2IvE=
+		Jrt4QrR9RKm2T530Wn12JbXyg2g=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/i386.swiftinterface</key>
 		<data>
-		VpdZc/sXtwOcuN9PNC+s9pjoT2Q=
+		7bj8TgJkH1QgRNoXxgDbGMpPujU=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/i386.swiftmodule</key>
 		<data>
-		pWCaJ9JthfUF01szejVnAhzaS1E=
+		FnQTDyqbw2/d9JExxh6Wxk2wCrU=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		Mwij4P3y3eAWLbtvltZfDftIpJY=
+		dYKmnbLk48ureiVM77hvLHbXkIE=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		JksSSi8rHaWLD2kyBBAdnXtEW5I=
+		ypOMgRNgaP1yuEg6W78T29JPrJ4=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		nhHr5xL7ncmGHKmLX2+b00Q6bLM=
+		+lPjjrOnh62OyE1xZP0/IXzH4DQ=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		Mwij4P3y3eAWLbtvltZfDftIpJY=
+		dYKmnbLk48ureiVM77hvLHbXkIE=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		JksSSi8rHaWLD2kyBBAdnXtEW5I=
+		ypOMgRNgaP1yuEg6W78T29JPrJ4=
 		</data>
 		<key>Modules/LivetexCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		nhHr5xL7ncmGHKmLX2+b00Q6bLM=
+		+lPjjrOnh62OyE1xZP0/IXzH4DQ=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -99,11 +99,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			hh+cCP23UOgIoOWiZjkg9zPowu4=
+			1LqFkhrTJUGunol++i0oH55hCE4=
 			</data>
 			<key>hash2</key>
 			<data>
-			RoxpFEL9UcPbP2m88U+WVWmF0xOTTmXipppf77XeuOs=
+			HREQvrzCN72FtksVWs6EEikNedgPJuqTZeB140qDWlg=
 			</data>
 		</dict>
 		<key>Headers/LivetexCore.h</key>
@@ -121,198 +121,198 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			qXKgv9d5aQwipIjTXUAzs1ONvms=
+			bdkQKUBKycf7LZAU+YtIiHnCqIg=
 			</data>
 			<key>hash2</key>
 			<data>
-			QUmUWoXHW3yG+PSbWAq0AV/NVMKi368XKymbqrj1FvQ=
+			8sgH7heyt7Sj1+YUIq8DkZD1Axd6hFgO7orLnbAGDGE=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sTQXtjkvKVcjFuCmQBh1Sxc0nqA=
+			YtEJaw1NuoQOQQ1WvWEKwMA1YRM=
 			</data>
 			<key>hash2</key>
 			<data>
-			6zd7xyxF61nri0ynOzToMpluXWeUyNFE8P9MC2M3P10=
+			3Ul5Huz60wYq9frRRp8pKHHPZd3A/ouxvM8wM+9/7NY=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7PL4sqDSuKbcWy4pERg71x60nmA=
+			iI4m3tUcdFtVQA7GWeJIUqMzNsM=
 			</data>
 			<key>hash2</key>
 			<data>
-			HsJL+jrMHWgcM3+3uMaAbQmtSn9/WhurFagQqzhfTWs=
+			2LVQGNz7jegi0jGyntrXh+yHmfmxLUwobXkRc0CssDo=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			qXKgv9d5aQwipIjTXUAzs1ONvms=
+			bdkQKUBKycf7LZAU+YtIiHnCqIg=
 			</data>
 			<key>hash2</key>
 			<data>
-			QUmUWoXHW3yG+PSbWAq0AV/NVMKi368XKymbqrj1FvQ=
+			8sgH7heyt7Sj1+YUIq8DkZD1Axd6hFgO7orLnbAGDGE=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sTQXtjkvKVcjFuCmQBh1Sxc0nqA=
+			YtEJaw1NuoQOQQ1WvWEKwMA1YRM=
 			</data>
 			<key>hash2</key>
 			<data>
-			6zd7xyxF61nri0ynOzToMpluXWeUyNFE8P9MC2M3P10=
+			3Ul5Huz60wYq9frRRp8pKHHPZd3A/ouxvM8wM+9/7NY=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			7PL4sqDSuKbcWy4pERg71x60nmA=
+			iI4m3tUcdFtVQA7GWeJIUqMzNsM=
 			</data>
 			<key>hash2</key>
 			<data>
-			HsJL+jrMHWgcM3+3uMaAbQmtSn9/WhurFagQqzhfTWs=
+			2LVQGNz7jegi0jGyntrXh+yHmfmxLUwobXkRc0CssDo=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/i386-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kMt5M+AuSavyMIT8BNQmxMV2IvE=
+			Jrt4QrR9RKm2T530Wn12JbXyg2g=
 			</data>
 			<key>hash2</key>
 			<data>
-			y5FdcL3EYTpmdXb3y32Ocov0tiigb1LoNeOSp6vO+4A=
+			ZsPTVG+kg5ixYlc3/mdPcKUj62wPc9D53fKaD41SaKA=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/i386-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VpdZc/sXtwOcuN9PNC+s9pjoT2Q=
+			7bj8TgJkH1QgRNoXxgDbGMpPujU=
 			</data>
 			<key>hash2</key>
 			<data>
-			afUXXyoNWvcsZKXBF2pUzLZGFd6sxAMcTjY8jMfqPyI=
+			922M12dt590F3aXM//80fgVMVfOTpsrP17w5cb9ITZg=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/i386-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pWCaJ9JthfUF01szejVnAhzaS1E=
+			FnQTDyqbw2/d9JExxh6Wxk2wCrU=
 			</data>
 			<key>hash2</key>
 			<data>
-			igWdXNtJrjaBmZnNDbUqfUOUxpHVCENen1MDp5EVvnQ=
+			XQlFfsEqoX2G8Kj0GjUeI3lwuucGrsWETo+UF5/W7V0=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/i386.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			kMt5M+AuSavyMIT8BNQmxMV2IvE=
+			Jrt4QrR9RKm2T530Wn12JbXyg2g=
 			</data>
 			<key>hash2</key>
 			<data>
-			y5FdcL3EYTpmdXb3y32Ocov0tiigb1LoNeOSp6vO+4A=
+			ZsPTVG+kg5ixYlc3/mdPcKUj62wPc9D53fKaD41SaKA=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/i386.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			VpdZc/sXtwOcuN9PNC+s9pjoT2Q=
+			7bj8TgJkH1QgRNoXxgDbGMpPujU=
 			</data>
 			<key>hash2</key>
 			<data>
-			afUXXyoNWvcsZKXBF2pUzLZGFd6sxAMcTjY8jMfqPyI=
+			922M12dt590F3aXM//80fgVMVfOTpsrP17w5cb9ITZg=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/i386.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			pWCaJ9JthfUF01szejVnAhzaS1E=
+			FnQTDyqbw2/d9JExxh6Wxk2wCrU=
 			</data>
 			<key>hash2</key>
 			<data>
-			igWdXNtJrjaBmZnNDbUqfUOUxpHVCENen1MDp5EVvnQ=
+			XQlFfsEqoX2G8Kj0GjUeI3lwuucGrsWETo+UF5/W7V0=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Mwij4P3y3eAWLbtvltZfDftIpJY=
+			dYKmnbLk48ureiVM77hvLHbXkIE=
 			</data>
 			<key>hash2</key>
 			<data>
-			OyhTlY782jdukX8RYRzrRgb+oqKO4wb18hUQMH676UI=
+			c9l3/haPeZoV2R59oN+gSsPwgV/rlc+zRux3cpjNKdc=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JksSSi8rHaWLD2kyBBAdnXtEW5I=
+			ypOMgRNgaP1yuEg6W78T29JPrJ4=
 			</data>
 			<key>hash2</key>
 			<data>
-			2742p8ICeBO66iIXFw15nAt0H+pQmTucDnSYSSXLiVk=
+			bRrB00tk9ymWMEJ5l0v4rmHfMfyO4XB9CiyisCidBIE=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nhHr5xL7ncmGHKmLX2+b00Q6bLM=
+			+lPjjrOnh62OyE1xZP0/IXzH4DQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			5TngvNYm2N6GaDfnR/8ba9PeXjc0Bxmm8nhntGg1pRI=
+			aAxsRYoMiicC2yyFaoJ0CQgmYpZYi6/b6oeWYjl9KTU=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			Mwij4P3y3eAWLbtvltZfDftIpJY=
+			dYKmnbLk48ureiVM77hvLHbXkIE=
 			</data>
 			<key>hash2</key>
 			<data>
-			OyhTlY782jdukX8RYRzrRgb+oqKO4wb18hUQMH676UI=
+			c9l3/haPeZoV2R59oN+gSsPwgV/rlc+zRux3cpjNKdc=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			JksSSi8rHaWLD2kyBBAdnXtEW5I=
+			ypOMgRNgaP1yuEg6W78T29JPrJ4=
 			</data>
 			<key>hash2</key>
 			<data>
-			2742p8ICeBO66iIXFw15nAt0H+pQmTucDnSYSSXLiVk=
+			bRrB00tk9ymWMEJ5l0v4rmHfMfyO4XB9CiyisCidBIE=
 			</data>
 		</dict>
 		<key>Modules/LivetexCore.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			nhHr5xL7ncmGHKmLX2+b00Q6bLM=
+			+lPjjrOnh62OyE1xZP0/IXzH4DQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			5TngvNYm2N6GaDfnR/8ba9PeXjc0Bxmm8nhntGg1pRI=
+			aAxsRYoMiicC2yyFaoJ0CQgmYpZYi6/b6oeWYjl9KTU=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
