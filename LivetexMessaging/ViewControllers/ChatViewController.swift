@@ -13,6 +13,7 @@ import Kingfisher
 import SafariServices
 import BFRImageViewer
 import LivetexCore
+import UniformTypeIdentifiers
 
 class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate {
 
@@ -33,7 +34,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
     override var inputAccessoryView: UIView? {
         return messageInputBarView
     }
-    
+
     override var canResignFirstResponder: Bool {
         true
     }
@@ -137,7 +138,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
                     self.messagesCollectionView.scrollToLastItem(animated: true)
                 })
             }
-
+            
             if self.viewModel.messages.isEmpty {
                 updates()
             } else {
@@ -217,8 +218,8 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.gestureRecognizers?.filter { $0 is UITapGestureRecognizer }
-            .forEach { $0.delaysTouchesBegan = false }
-
+        .forEach { $0.delaysTouchesBegan = false }
+        
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         layout?.sectionInset = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
         layout?.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right,
@@ -255,7 +256,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
             self?.sendAttachment()
         }
     }
-
+    
     // MARK: - Send attachment
 
     private func sendAttachment() {
@@ -274,7 +275,10 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         }
         camera.setValue(UIImage(asset: .camera), forKey: "image")
         let documents = UIAlertAction(title: "Документ", style: .default) { _ in
-            let documentPickerController = UIDocumentPickerViewController(documentTypes: [], in: .open)
+            let allowedContentTypes: [UTType] = [.pdf,
+                                                 .jpeg,
+                                                 .png]
+            let documentPickerController = UIDocumentPickerViewController(forOpeningContentTypes: allowedContentTypes)
             documentPickerController.delegate = self
             documentPickerController.allowsMultipleSelection = false
             self.present(documentPickerController, animated: true)
@@ -418,8 +422,8 @@ extension ChatViewController: UIContextMenuInteractionDelegate {
         let point = interaction.location(in: messagesCollectionView)
         guard let indexPath = messagesCollectionView.indexPathForItem(at: point),
               case let .text(value) = viewModel.messages[indexPath.section].kind else {
-            return nil
-        }
+                  return nil
+              }
 
         let message = viewModel.messages[indexPath.section]
         let testView = FollowMessageView(name: message.sender.displayName, text: value)
@@ -459,8 +463,8 @@ extension ChatViewController: MessageCellDelegate {
               case let .photo(item) = viewModel.messages[indexPath.section].kind, let url = item.url,
               let imageSource = BFRBackLoadedImageSource(initialImage: item.placeholderImage, hiResURL: url),
               let viewController = BFRImageViewController(imageSource: [imageSource]) else {
-            return
-        }
+                  return
+              }
 
         present(viewController, animated: true)
     }
@@ -526,10 +530,10 @@ extension ChatViewController: MessagesDisplayDelegate {
         guard let chatMessage = message as? ChatViewModel.ChatMessage,
               let urlString = chatMessage.creator.employee?.avatarUrl,
               let resourceURL = URL(string: urlString) else {
-            avatarView.backgroundColor = .clear
-            avatarView.set(avatar: Avatar(image: placeholderImage))
-            return
-        }
+                  avatarView.backgroundColor = .clear
+                  avatarView.set(avatar: Avatar(image: placeholderImage))
+                  return
+              }
 
         avatarView.kf.setImage(with: ImageResource(downloadURL: resourceURL), placeholder: placeholderImage)
     }
@@ -553,8 +557,8 @@ extension ChatViewController: MessagesLayoutDelegate {
     func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
         guard let keyboard = viewModel.messages[section].keyboard, !keyboard.buttons.isEmpty,
               let layout = messagesCollectionView.collectionViewLayout as? CustomMessagesFlowLayout else {
-            return .zero
-        }
+                  return .zero
+              }
 
         return CGSize(width: layout.itemWidth, height: ActionsReusableView.viewHeight(for: keyboard))
     }
@@ -567,9 +571,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                                didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         guard let image = info[.originalImage] as? UIImage,
               let data = image.jpegData(compressionQuality: 0.5) else {
-            picker.dismiss(animated: true)
-            return
-        }
+                  picker.dismiss(animated: true)
+                  return
+              }
 
         viewModel.sessionService?.upload(data: data, fileName: "image.png", mimeType: "image/jpeg") { [weak self] result in
             switch result {
@@ -588,15 +592,43 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 extension ChatViewController: UIDocumentPickerDelegate {
 
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
-        guard let url = urls.first, let _ = try? Data(contentsOf: url) else {
-            return
+        guard let url = urls.first,
+              let documentData = try? Data(contentsOf: url) else {
+                  return
+              }
+
+        let documentURL = urls[0]
+        let documentExtension = documentURL.pathExtension
+
+        switch documentExtension {
+        case "pdf":
+            viewModel.sessionService?.upload(data: documentData, fileName: "document.pdf", mimeType: "application/pdf") { [weak self] result in
+                switch result {
+                case let .success(attachment):
+                    self?.viewModel.sendEvent(ClientEvent(.file(attachment)))
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
+            }
+
+        case "png", "jpeg":
+            viewModel.sessionService?.upload(data: documentData, fileName: "image.png", mimeType: "image/jpeg") { [weak self] result in
+                switch result {
+                case let .success(attachment):
+                    self?.viewModel.sendEvent(ClientEvent(.file(attachment)))
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
+            }
+        default:
+            print("Sending of \(documentExtension) documents is not implemented yet.")
         }
     }
 
 }
 
 private extension ChatViewController {
-    
+
     func handleInputStateIfNeeded(shouldShowInput: Bool?) {
         if let shouldShowInput = shouldShowInput {
             if shouldShowInput {
@@ -606,18 +638,14 @@ private extension ChatViewController {
             }
         }
     }
-    
+
     func hideInputAccessoryView() {
         guard let firstResponder = UIResponder.first else {
             return
         }
-        
+
         firstResponder.resignFirstResponder()
         hideInputAccessoryView()
     }
-    
+
 }
-
-
-
-
