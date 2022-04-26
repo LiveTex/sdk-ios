@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-compiler-version: Apple Swift version 5.5.1 (swiftlang-1300.0.31.4 clang-1300.0.29.6)
 // swift-module-flags: -target x86_64-apple-ios9.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name LivetexCore
 import Foundation
 @_exported import LivetexCore
 import Swift
 import UIKit
+import _Concurrency
 public struct Creator : Swift.Codable {
   public let type: LivetexCore.Creator.CreatorType
   public let employee: LivetexCore.Employee?
@@ -25,7 +26,7 @@ public struct Creator : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-extension ClientEvent {
+extension LivetexCore.ClientEvent {
   public enum EventType : Swift.String, Swift.Codable {
     case text
     case file
@@ -76,11 +77,11 @@ public struct ClientEvent : Swift.Encodable {
 }
 public struct WebSocketEvents {
   public var open: () -> ()
-  public var close: (Swift.Int, Swift.String, Swift.Bool) -> ()
-  public var error: (Swift.Error) -> ()
-  public var message: (Any) -> ()
-  public var pong: (Any) -> ()
-  public var end: (Swift.Int, Swift.String, Swift.Bool, Swift.Error?) -> ()
+  public var close: (_ code: Swift.Int, _ reason: Swift.String, _ wasClean: Swift.Bool) -> ()
+  public var error: (_ error: Swift.Error) -> ()
+  public var message: (_ data: Any) -> ()
+  public var pong: (_ data: Any) -> ()
+  public var end: (_ code: Swift.Int, _ reason: Swift.String, _ wasClean: Swift.Bool, _ error: Swift.Error?) -> ()
 }
 public enum WebSocketBinaryType : Swift.CustomStringConvertible {
   case uInt8Array
@@ -226,7 +227,7 @@ public enum WebSocketError : Swift.Error, Swift.CustomStringConvertible {
   @objc deinit
 }
 public func == (lhs: LivetexCore.WebSocket, rhs: LivetexCore.WebSocket) -> Swift.Bool
-extension WebSocket {
+extension LivetexCore.WebSocket {
   @objc dynamic public var delegate: LivetexCore.WebSocketDelegate? {
     @objc get
     @objc set
@@ -325,7 +326,7 @@ public class LivetexSessionService : LivetexCore.WebSocketDelegate {
   public func upload(data: Foundation.Data, fileName: Swift.String, mimeType: Swift.String, completionHandler: @escaping (Swift.Result<LivetexCore.MessageAttachment, LivetexCore.LTError>) -> Swift.Void)
   @objc deinit
 }
-extension ServiceEvent {
+extension LivetexCore.ServiceEvent {
   public enum EventType : Swift.String, Swift.Codable {
     case state
     case result
@@ -385,7 +386,7 @@ public struct Department : Swift.Decodable {
   public let order: Swift.Int
   public init(from decoder: Swift.Decoder) throws
 }
-extension ClientEvent {
+extension LivetexCore.ClientEvent {
   public enum Content : Swift.Encodable {
     case text(Swift.String)
     case file(LivetexCore.MessageAttachment)
@@ -421,7 +422,7 @@ public enum Token {
   case custom(Swift.String)
 }
 public class LivetexAuthService {
-  public init(token: LivetexCore.Token? = nil, deviceToken: Swift.String)
+  public init(token: LivetexCore.Token? = nil, deviceToken: Swift.String, authPath: Swift.String? = nil)
   public func requestAuthorization(result: @escaping (Swift.Result<LivetexCore.SessionToken, LivetexCore.LTError>) -> Swift.Void)
   @objc deinit
 }

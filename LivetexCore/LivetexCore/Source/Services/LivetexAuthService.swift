@@ -13,7 +13,7 @@ public enum Token {
     case custom(String)
 }
 
-private let authPath = "https://visitor-api.livetex.ru/v1/auth"
+private let defaultAuthPath = "https://visitor-api.livetex.ru/v1/auth"
 
 public class LivetexAuthService {
 
@@ -21,18 +21,23 @@ public class LivetexAuthService {
 
     private let deviceToken: String
 
+    private let authPath: String?
+
     // MARK: - Initialization
 
-    public init(token: Token? = nil, deviceToken: String) {
+    public init(token: Token? = nil,
+                deviceToken: String,
+                authPath: String? = nil) {
         self.token = token
         self.deviceToken = deviceToken
+        self.authPath = authPath
     }
 
     // MARK: - Authentication
 
     public func requestAuthorization(result: @escaping (Result<SessionToken, LTError>) -> Void) {
         let livetexInfo = Bundle.main.infoDictionary?["Livetex"] as? [String: String]
-        var components = URLComponents(string: authPath)
+        var components = URLComponents(string: authPath ?? defaultAuthPath)
         components?.queryItems = [
             URLQueryItem(name: "touchPoint", value: livetexInfo?["LivetexAppID"]),
             URLQueryItem(name: "deviceToken", value: deviceToken),
@@ -59,9 +64,9 @@ public class LivetexAuthService {
             } else {
                 guard let response = response as? HTTPURLResponse,
                       response.statusCode == 200, let responseData = data else {
-                    result(.failure(.responseValidationFailed))
-                    return
-                }
+                          result(.failure(.responseValidationFailed))
+                          return
+                      }
 
                 do {
                     let token = try JSONDecoder().decode(SessionToken.self, from: responseData)
