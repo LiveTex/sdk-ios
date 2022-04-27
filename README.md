@@ -13,6 +13,10 @@ iOS SDK и демо-приложение для нового VisitorAPI
 </dict>
 ```
 # Использование
+## Установка кастомного эндпоинта для подключения
+```
+let loginService = LivetexAuthService(token: "visitorToken", deviceToken: "apns deviceToken", authPath: "your authentication url")
+```
 ## Авторизация и установление соединения с сервером
 ```
 let loginService = LivetexAuthService(token: "visitorToken", deviceToken: "apns deviceToken")
