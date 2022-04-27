@@ -421,7 +421,7 @@ public enum Token {
   case custom(Swift.String)
 }
 public class LivetexAuthService {
-  public init(token: LivetexCore.Token? = nil, deviceToken: Swift.String)
+  public init(token: LivetexCore.Token? = nil, deviceToken: Swift.String, authPath: Swift.String? = nil)
   public func requestAuthorization(result: @escaping (Swift.Result<LivetexCore.SessionToken, LivetexCore.LTError>) -> Swift.Void)
   @objc deinit
 }
