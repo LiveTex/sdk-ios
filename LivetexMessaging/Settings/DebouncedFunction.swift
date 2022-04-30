@@ -3,7 +3,7 @@
 //  LivetexMessaging
 //
 //  Created by LiveTex on 01.03.2020.
-//  Copyright © 2020 LiveTex. All rights reserved.
+//  Copyright © 2022 Livetex. All rights reserved.
 //
 
 import UIKit

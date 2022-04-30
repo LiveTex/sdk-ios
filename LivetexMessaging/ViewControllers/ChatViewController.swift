@@ -3,7 +3,7 @@
 //  LivetexMessaging
 //
 //  Created by Livetex on 19.05.2020.
-//  Copyright © 2020 Livetex. All rights reserved.
+//  Copyright © 2022 Livetex. All rights reserved.
 //
 
 import UIKit
@@ -17,16 +17,22 @@ import UniformTypeIdentifiers
 
 class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate {
 
-    private let titleView = TitleView()
-    private let avatarView = OperatorAvatarView()
-    private let viewModel = ChatViewModel()
-    private let estimationView = EstimationView()
-    private let messageInputBarView = MessageInputBarView()
+    private struct Appearance {
+        static let activityIndicatorRect = CGRect(x: 0, y: 0, width: 20, height: 20)
+    }
 
-    private lazy var typingFunction = DebouncedFunction(timeInterval: 2) { [weak self] in
+    private struct Constants {
+        static let debouncedFunctionTimeInterval: TimeInterval = 2
+    }
+
+    // MARK: - Properties
+
+    private lazy var viewModel = ChatViewModel()
+
+    private lazy var typingFunction = DebouncedFunction(timeInterval: Constants.debouncedFunctionTimeInterval) { [weak self] in
         self?.setTypingIndicatorViewHidden(true, animated: true)
     }
-    
+
     // Local variable showing input state
     // onDialogStateReceived dependent
     private var shouldShowInput: Bool? = true
@@ -38,6 +44,19 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
     override var canResignFirstResponder: Bool {
         true
     }
+
+    // MARK: - Views
+
+    private lazy var dialogueStateView = DialogueStateView()
+    private lazy var avatarView = OperatorAvatarView()
+    private lazy var estimationView = EstimationView()
+    private lazy var messageInputBarView = MessageInputBarView()
+
+    private lazy var barButton: UIBarButtonItem = {
+        let activityIndicator = UIActivityIndicatorView(frame: Appearance.activityIndicatorRect)
+
+        return UIBarButtonItem(customView: activityIndicator)
+    }()
 
     // MARK: - Lifecycle
 
@@ -55,7 +74,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         super.viewDidLayoutSubviews()
 
         let navigationBarFrame = navigationController?.navigationBar.frame ?? .zero
-        titleView.frame = CGRect(x: 0,
+        dialogueStateView.frame = CGRect(x: 0,
                                  y: 0,
                                  width: 0.7 * navigationBarFrame.width,
                                  height: navigationBarFrame.height)
@@ -64,6 +83,8 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
 
         layoutEstimationView()
     }
+
+    // MARK: - Configuration
 
     private func layoutEstimationView() {
         let offset = viewModel.isEmployeeEstimated ? EstimationView.viewHeight : 0
@@ -76,8 +97,6 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         messagesCollectionView.scrollIndicatorInsets.top = viewModel.isEmployeeEstimated ? 0 : EstimationView.viewHeight
     }
 
-    // MARK: - Configuration
-
     private func configureEstimationView() {
         view.addSubview(estimationView)
 
@@ -86,7 +105,36 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         }
     }
 
+    private func configureNavigationItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: avatarView)
+        navigationItem.titleView = dialogueStateView
+    }
+
+    private func configureInputBar() {
+        messageInputBarView.delegate = self
+
+        messageInputBarView.onAttachmentButtonTapped = { [weak self] in
+            self?.sendAttachment()
+        }
+    }
+
+    private func setConnectingState() {
+        dialogueStateView.setConnectionInProgress()
+    }
+
+    private func setConnectedState() {
+        dialogueStateView.setConnectedSuccessfully()
+    }
+
+    // MARK: - ViewModel binding
+
     private func configureViewModel() {
+        viewModel.onWebsocketStateChanged = { [weak self] isConnected in
+            isConnected ?
+            self?.setConnectedState() :
+            self?.setConnectingState()
+        }
+
         viewModel.onDepartmentReceived = { [weak self] departments in
             guard let self = self, !departments.isEmpty else {
                 return
@@ -154,8 +202,8 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         }
 
         viewModel.onDialogStateReceived = { [weak self] dialog in
-            self?.titleView.title = dialog.employee?.name
-            self?.titleView.subtitle = dialog.employeeStatus?.rawValue
+            self?.dialogueStateView.title = dialog.employee?.name
+            self?.dialogueStateView.subtitle = dialog.employeeStatus?.rawValue
             self?.avatarView.setImage(with: URL(string: dialog.employee?.avatarUrl ?? ""))
             self?.shouldShowInput = dialog.showInput
             self?.handleInputStateIfNeeded(shouldShowInput: dialog.showInput)
@@ -179,7 +227,8 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
 
             let placeholder = NSMutableAttributedString(string: "* Имя")
             placeholder.setAttributes([.foregroundColor: UIColor.red,
-                                       .baselineOffset: 1], range: NSRange(location: 0, length: 1))
+                                       .baselineOffset: 1],
+                                      range: NSRange(location: 0, length: 1))
 
             alertController.addTextField { textField in
                 textField.attributedPlaceholder = placeholder
@@ -243,19 +292,6 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         scrollsToLastItemOnKeyboardBeginsEditing = true
         maintainPositionOnKeyboardFrameChanged = true
     }
-
-    private func configureNavigationItem() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: avatarView)
-        navigationItem.titleView = titleView
-    }
-
-    private func configureInputBar() {
-        messageInputBarView.delegate = self
-
-        messageInputBarView.onAttachmentButtonTapped = { [weak self] in
-            self?.sendAttachment()
-        }
-    }
     
     // MARK: - Send attachment
 
@@ -264,16 +300,19 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         let cancel = UIAlertAction(title: "Отменить", style: .cancel)
+
         let library = UIAlertAction(title: "Фото", style: .default) { _ in
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true)
         }
         library.setValue(UIImage(asset: .photo), forKey: "image")
+
         let camera = UIAlertAction(title: "Камера", style: .default) { _ in
             imagePickerController.sourceType = .camera
             self.present(imagePickerController, animated: true)
         }
         camera.setValue(UIImage(asset: .camera), forKey: "image")
+
         let documents = UIAlertAction(title: "Документ", style: .default) { _ in
             let allowedContentTypes: [UTType] = [.pdf,
                                                  .jpeg,
@@ -284,6 +323,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
             self.present(documentPickerController, animated: true)
         }
         documents.setValue(UIImage(asset: .document), forKey: "image")
+
         alertController.addActions(camera, library, documents, cancel)
         alertController.view.tintColor = .black
         present(alertController, animated: true)
@@ -296,6 +336,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         messageInputBarView.inputTextView.text = ""
         messageInputBarView.invalidatePlugins()
         messageInputBarView.topStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
         if let followMessage = viewModel.followMessage {
             viewModel.followMessage = nil
             viewModel.sendEvent(ClientEvent(.text("> \(followMessage)\n\(trimmedText)")))
@@ -335,6 +376,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
                 cell.messageContainerView.addInteraction(UIContextMenuInteraction(delegate: self))
             }
             return cell
+
         case let .custom(value):
             guard let type = value as? CustomType else {
                 return super.collectionView(collectionView, cellForItemAt: indexPath)
@@ -350,6 +392,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
                 cell.configure(with: message, at: indexPath, and: messagesCollectionView)
                 return cell
             }
+
         default:
             return super.collectionView(collectionView, cellForItemAt: indexPath)
         }
@@ -366,6 +409,33 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
     }
 
 }
+
+// MARK: - Helper methods
+
+private extension ChatViewController {
+
+    func handleInputStateIfNeeded(shouldShowInput: Bool?) {
+        if let shouldShowInput = shouldShowInput {
+            if shouldShowInput {
+                becomeFirstResponder()
+            } else {
+                hideInputAccessoryView()
+            }
+        }
+    }
+
+    func hideInputAccessoryView() {
+        guard let firstResponder = UIResponder.first else {
+            return
+        }
+
+        firstResponder.resignFirstResponder()
+        hideInputAccessoryView()
+    }
+
+}
+
+// MARK: - MessagesDataSource
 
 extension ChatViewController: MessagesDataSource {
 
@@ -413,6 +483,8 @@ extension ChatViewController: MessagesDataSource {
     }
 
 }
+
+// MARK: - UIContextMenuInteractionDelegate
 
 extension ChatViewController: UIContextMenuInteractionDelegate {
 
@@ -540,6 +612,8 @@ extension ChatViewController: MessagesDisplayDelegate {
 
 }
 
+// MARK: - MessagesLayoutDelegate
+
 extension ChatViewController: MessagesLayoutDelegate {
 
     func cellTopLabelHeight(for message: MessageType,
@@ -600,6 +674,8 @@ extension ChatViewController: UIDocumentPickerDelegate {
         let documentURL = urls[0]
         let documentExtension = documentURL.pathExtension
 
+        // TODO: - Add methods upload and sendEvent to viewModel
+
         switch documentExtension {
         case "pdf":
             viewModel.sessionService?.upload(data: documentData, fileName: "document.pdf", mimeType: "application/pdf") { [weak self] result in
@@ -623,29 +699,6 @@ extension ChatViewController: UIDocumentPickerDelegate {
         default:
             print("Sending of \(documentExtension) documents is not implemented yet.")
         }
-    }
-
-}
-
-private extension ChatViewController {
-
-    func handleInputStateIfNeeded(shouldShowInput: Bool?) {
-        if let shouldShowInput = shouldShowInput {
-            if shouldShowInput {
-                becomeFirstResponder()
-            } else {
-                hideInputAccessoryView()
-            }
-        }
-    }
-
-    func hideInputAccessoryView() {
-        guard let firstResponder = UIResponder.first else {
-            return
-        }
-
-        firstResponder.resignFirstResponder()
-        hideInputAccessoryView()
     }
 
 }
