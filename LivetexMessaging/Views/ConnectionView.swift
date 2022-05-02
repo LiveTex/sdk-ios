@@ -12,6 +12,7 @@ final class ConnectionView: UIView {
 
     private struct Appearance {
         static let titleLabelFont: UIFont = .systemFont(ofSize: 17, weight: .semibold)
+        static let titleLabelToActivityIndicatorInset: CGFloat = 16
     }
 
     // MARK: - Views
@@ -26,11 +27,24 @@ final class ConnectionView: UIView {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
+        label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = Appearance.titleLabelFont
         label.textAlignment = .left
         label.textColor = .black
+
         return label
+    }()
+
+    private lazy var stackView: UIStackView = {
+        let stackView = UIStackView()
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.distribution = .fill
+        stackView.alignment = .center
+        stackView.spacing = Appearance.titleLabelToActivityIndicatorInset
+
+        return stackView
     }()
 
     // MARK: - Initialization
@@ -38,10 +52,9 @@ final class ConnectionView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        addSubview(titleLabel)
-        addSubview(activityIndicator)
-
-        configureConstraints()
+        addSubview(stackView)
+        stackView.addArrangedSubview(activityIndicator)
+        stackView.addArrangedSubview(titleLabel)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -53,15 +66,8 @@ final class ConnectionView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        titleLabel.frame.size = CGSize(width: bounds.width,
-                                       height: bounds.height)
-
-        activityIndicator.frame = CGRect(x: 0,
-                                         y: 0,
-                                         width: bounds.height,
-                                         height: bounds.height)
+        stackView.frame = stackViewFrame
     }
-
 }
 
 extension ConnectionView {
@@ -82,9 +88,13 @@ extension ConnectionView {
 
 extension ConnectionView {
 
-    private func configureConstraints() {
-        NSLayoutConstraint.activate([
-            titleLabel.leftAnchor.constraint(equalTo: activityIndicator.rightAnchor, constant: 8)
-        ])
+    private var stackViewFrame: CGRect {
+        let titleLabelWidth = titleLabel.intrinsicContentSize.width
+        let activityIndicatorWidth = bounds.height
+
+        let stackViewWidth = activityIndicatorWidth + titleLabelWidth + Appearance.titleLabelToActivityIndicatorInset
+        let xCoord = (bounds.width - stackViewWidth) / 2
+
+        return CGRect(x: xCoord, y: 0, width: stackViewWidth, height: bounds.height)
     }
 }

@@ -13,6 +13,8 @@ final class DialogueStateView: UIView {
     private struct Appearance {
         static let titleLabelFont: UIFont = .systemFont(ofSize: 17, weight: .semibold)
         static let subtitleLabelFont: UIFont = .systemFont(ofSize: 13)
+
+        static let connectionViewText: String = "connecting"
     }
 
     var title: String? {
@@ -57,7 +59,12 @@ final class DialogueStateView: UIView {
         return label
     }()
 
-    private lazy var connectionView = ConnectionView()
+    private lazy var connectionView: ConnectionView = {
+        let connectionView = ConnectionView()
+        connectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        return connectionView
+    }()
 
     // MARK: - Initialization
 
@@ -68,7 +75,7 @@ final class DialogueStateView: UIView {
         addSubview(subtitleLabel)
         addSubview(connectionView)
 
-        connectionView.setTitle("connecting")
+        connectionView.setTitle(Appearance.connectionViewText)
         setConnectionInProgress()
     }
 

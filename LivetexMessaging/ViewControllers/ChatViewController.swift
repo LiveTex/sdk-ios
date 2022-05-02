@@ -28,7 +28,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
     // MARK: - Properties
 
     private lazy var viewModel = ChatViewModel()
-
+    
     private lazy var typingFunction = DebouncedFunction(timeInterval: Constants.debouncedFunctionTimeInterval) { [weak self] in
         self?.setTypingIndicatorViewHidden(true, animated: true)
     }
@@ -47,7 +47,13 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
 
     // MARK: - Views
 
-    private lazy var dialogueStateView = DialogueStateView()
+    private lazy var dialogueStateView: DialogueStateView = {
+        let dialogueStateView = DialogueStateView()
+        dialogueStateView.translatesAutoresizingMaskIntoConstraints = false
+
+        return dialogueStateView
+    }()
+    
     private lazy var avatarView = OperatorAvatarView()
     private lazy var estimationView = EstimationView()
     private lazy var messageInputBarView = MessageInputBarView()
@@ -72,12 +78,6 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        let navigationBarFrame = navigationController?.navigationBar.frame ?? .zero
-        dialogueStateView.frame = CGRect(x: 0,
-                                 y: 0,
-                                 width: 0.7 * navigationBarFrame.width,
-                                 height: navigationBarFrame.height)
 
         avatarView.frame = CGRect(origin: .zero, size: CGSize(width: 30, height: 30))
 
@@ -152,7 +152,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
                     self.handleInputStateIfNeeded(shouldShowInput: self.shouldShowInput)
                 }
             }
-
+            
             let alertController = UIAlertController(title: "Выбор отдела",
                                                     message: "Выберите куда направить ваше обращение",
                                                     preferredStyle: .actionSheet)
@@ -170,7 +170,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
                 self?.messagesCollectionView.reloadSections(IndexSet(integer: index))
             }, completion: nil)
         }
-
+        
         viewModel.onMessagesReceived = { [weak self] newMessages in
             guard let self = self else {
                 return
@@ -200,14 +200,14 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
                 }
             }
         }
-
+        
         viewModel.onDialogStateReceived = { [weak self] dialog in
             self?.dialogueStateView.title = dialog.employee?.name
             self?.dialogueStateView.subtitle = dialog.employeeStatus?.rawValue
             self?.avatarView.setImage(with: URL(string: dialog.employee?.avatarUrl ?? ""))
             self?.shouldShowInput = dialog.showInput
             self?.handleInputStateIfNeeded(shouldShowInput: dialog.showInput)
-            
+
             UIView.animate(withDuration: 0.5) {
                 self?.layoutEstimationView()
             }
@@ -229,7 +229,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
             placeholder.setAttributes([.foregroundColor: UIColor.red,
                                        .baselineOffset: 1],
                                       range: NSRange(location: 0, length: 1))
-
+            
             alertController.addTextField { textField in
                 textField.attributedPlaceholder = placeholder
             }
@@ -268,7 +268,7 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.gestureRecognizers?.filter { $0 is UITapGestureRecognizer }
         .forEach { $0.delaysTouchesBegan = false }
-        
+
         let layout = messagesCollectionView.collectionViewLayout as? MessagesCollectionViewFlowLayout
         layout?.sectionInset = UIEdgeInsets(top: 5, left: 8, bottom: 5, right: 8)
         layout?.setMessageOutgoingMessageTopLabelAlignment(LabelAlignment(textAlignment: .right,
@@ -288,11 +288,11 @@ class ChatViewController: MessagesViewController, InputBarAccessoryViewDelegate 
         layout?.setMessageOutgoingAccessoryViewPadding(.zero)
         layout?.setMessageOutgoingAvatarSize(.zero)
         layout?.setMessageIncomingAvatarSize(CGSize(width: 30, height: 30))
-
+        
         scrollsToLastItemOnKeyboardBeginsEditing = true
         maintainPositionOnKeyboardFrameChanged = true
     }
-    
+
     // MARK: - Send attachment
 
     private func sendAttachment() {
@@ -472,7 +472,7 @@ extension ChatViewController: MessagesDataSource {
         guard let keyboard = message.keyboard else {
             return MessageReusableView()
         }
-
+        
         let view = messagesCollectionView.dequeueReusableFooterView(ActionsReusableView.self, for: indexPath)
         view.configure(with: keyboard)
         view.onAction = { [weak self] button in
@@ -487,7 +487,7 @@ extension ChatViewController: MessagesDataSource {
 // MARK: - UIContextMenuInteractionDelegate
 
 extension ChatViewController: UIContextMenuInteractionDelegate {
-
+    
     @available(iOS 13.0, *)
     func contextMenuInteraction(_ interaction: UIContextMenuInteraction,
                                 configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
@@ -627,7 +627,7 @@ extension ChatViewController: MessagesLayoutDelegate {
                                in messagesCollectionView: MessagesCollectionView) -> CGFloat {
         return isFromCurrentSender(message: message) ? 0 : 20
     }
-
+    
     func footerViewSize(for section: Int, in messagesCollectionView: MessagesCollectionView) -> CGSize {
         guard let keyboard = viewModel.messages[section].keyboard, !keyboard.buttons.isEmpty,
               let layout = messagesCollectionView.collectionViewLayout as? CustomMessagesFlowLayout else {
