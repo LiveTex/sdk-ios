@@ -3,12 +3,19 @@
 //  LivetexMessaging
 //
 //  Created by Livetex on 19.05.2020.
-//  Copyright © 2020 Livetex. All rights reserved.
+//  Copyright © 2022 Livetex. All rights reserved.
 //
 
 import UIKit
 
-class TitleView: UIView {
+final class DialogueStateView: UIView {
+
+    private struct Appearance {
+        static let titleLabelFont: UIFont = .systemFont(ofSize: 17, weight: .semibold)
+        static let subtitleLabelFont: UIFont = .systemFont(ofSize: 13)
+
+        static let connectionViewText: String = "connecting"
+    }
 
     var title: String? {
         get {
@@ -35,21 +42,28 @@ class TitleView: UIView {
         }
     }
 
-    private let titleLabel: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 17, weight: .semibold)
+        label.font = Appearance.titleLabelFont
         label.textAlignment = .center
         label.textColor = .black
         return label
     }()
 
-    private let subtitleLabel: UILabel = {
+    private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 13)
+        label.font = Appearance.subtitleLabelFont
         label.textAlignment = .center
         label.textColor = .black
         label.isHidden = true
         return label
+    }()
+
+    private lazy var connectionView: ConnectionView = {
+        let connectionView = ConnectionView()
+        connectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        return connectionView
     }()
 
     // MARK: - Initialization
@@ -59,6 +73,10 @@ class TitleView: UIView {
 
         addSubview(titleLabel)
         addSubview(subtitleLabel)
+        addSubview(connectionView)
+
+        connectionView.setTitle(Appearance.connectionViewText)
+        setConnectionInProgress()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -79,6 +97,23 @@ class TitleView: UIView {
                                      y: titleLabel.frame.maxY,
                                      width: bounds.width,
                                      height: subtitleLabel.font.lineHeight)
+
+        connectionView.frame = CGRect(x: 0,
+                                      y: 0,
+                                      width: bounds.width,
+                                      height: bounds.height)
+    }
+}
+
+extension DialogueStateView {
+
+    func setConnectionInProgress() {
+        connectionView.isHidden = false
+        connectionView.startActivityIndicator()
     }
 
+    func setConnectedSuccessfully() {
+        connectionView.isHidden = true
+        connectionView.stopActivityIndicator()
+    }
 }

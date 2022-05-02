@@ -3,7 +3,7 @@
 //  LivetexMessaging
 //
 //  Created by Livetex on 19.05.2020.
-//  Copyright © 2020 Livetex. All rights reserved.
+//  Copyright © 2022 Livetex. All rights reserved.
 //
 
 import UIKit
@@ -19,6 +19,7 @@ class ChatViewModel {
     var onDialogStateReceived: ((Conversation) -> Void)?
     var onAttributesReceived: (() -> Void)?
     var onTypingReceived: (() -> Void)?
+    var onWebsocketStateChanged: ((Bool) -> Void)?
 
     var followMessage: String?
     var messages: [ChatMessage] = []
@@ -80,6 +81,14 @@ class ChatViewModel {
         sessionService = LivetexSessionService(token: token)
         sessionService?.onEvent = { [weak self] event in
             self?.didReceive(event: event)
+        }
+
+        sessionService?.onConnect = { [weak self] in
+            self?.onWebsocketStateChanged?(true)
+        }
+
+        sessionService?.onDisconnect = { [weak self] in
+            self?.onWebsocketStateChanged?(false)
         }
 
         sessionService?.connect()
