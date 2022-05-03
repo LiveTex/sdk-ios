@@ -75,12 +75,12 @@ public class LivetexSessionService: WebSocketDelegate {
     // MARK: - Send Event
 
     public func sendEvent(_ event: ClientEvent) {
-        eventQueue.async {
+        eventQueue.async { [weak self] in
             do {
-                let payload = try self.mapper.encode(event) ?? ""
-                self.webSocket.send(text: payload)
+                let payload = try self?.mapper.encode(event) ?? ""
+                self?.webSocket.send(text: payload)
             } catch {
-                self.onError?(error)
+                self?.onError?(error)
             }
         }
     }
