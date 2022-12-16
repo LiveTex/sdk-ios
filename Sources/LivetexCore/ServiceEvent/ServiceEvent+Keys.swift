@@ -6,7 +6,6 @@
 //  Copyright © 2020 Livetex. All rights reserved.
 //
 
-import UIKit
 
 extension ServiceEvent {
 

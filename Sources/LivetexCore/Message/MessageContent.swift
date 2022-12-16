@@ -6,8 +6,6 @@
 //  Copyright © 2020 Livetex. All rights reserved.
 //
 
-import UIKit
-
 public enum MessageContent: Decodable {
     case text(String)
     case file(MessageAttachment)

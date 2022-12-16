@@ -6,8 +6,6 @@
 //  Copyright © 2020 Livetex. All rights reserved.
 //
 
-import UIKit
-
 public struct Conversation: Decodable {
     public let type: ServiceEvent.EventType
     public let status: Status

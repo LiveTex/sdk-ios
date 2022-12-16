@@ -6,7 +6,7 @@
 //  Copyright © 2020 Livetex. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public struct Message: MessageItem, Decodable {
     public let id: String

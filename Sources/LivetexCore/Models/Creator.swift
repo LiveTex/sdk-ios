@@ -6,8 +6,6 @@
 //  Copyright © 2020 Livetex. All rights reserved.
 //
 
-import UIKit
-
 public struct Creator: Codable {
     public let type: CreatorType
     public let employee: Employee?

@@ -6,8 +6,6 @@
 //  Copyright © 2020 LiveTex. All rights reserved.
 //
 
-import UIKit
-
 public struct Keyboard: Decodable {
     public let buttons: [Button]
     public let pressed: Bool

@@ -6,8 +6,6 @@
 //  Copyright © 2020 Livetex. All rights reserved.
 //
 
-import UIKit
-
 public struct Employee: Codable {
     public let name: String
     public let position: String

@@ -6,6 +6,8 @@
 //  Copyright © 2020 Livetex. All rights reserved.
 //
 
+import Foundation
+
 public struct Update: Decodable {
     public let correlationId: String?
     public let type: ServiceEvent.EventType
