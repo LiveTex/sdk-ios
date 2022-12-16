@@ -10,7 +10,7 @@ let package = Package(
     ],
     dependencies: [],
     targets: [
-        .target(name: "LivetexCore", dependencies: []),
+        .target(name: "LivetexCore", dependencies: [], linkerSettings: [.linkedLibrary("z")]),
         .testTarget(name: "LivetexCoreTests", dependencies: ["LivetexCore"]),
     ]
 )
