@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Security
 
 public enum Token {
     case system(String)
@@ -34,9 +33,6 @@ public class LivetexAuthService {
         self.authPath = authPath
     }
 
-   private var keychainItem: CFDictionary? = nil
-   private var ref: AnyObject?
-
     // MARK: - Authentication
 
     public func requestAuthorization(result: @escaping (Result<SessionToken, LTError>) -> Void) {
@@ -51,11 +47,11 @@ public class LivetexAuthService {
         if let token = token {
             switch token {
             case let .system(value):
-                self.keychainItem = [kSecAttrAccount: value] as? CFDictionary
+                UserDefaults.standard.set(value, forKey: "visitorToken")
                 components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: value))
             case let .custom(value):
-                let result = ref as? NSDictionary
-                let visitorToken = result?[kSecAttrAccount] as? String
+                let visitorToken = UserDefaults.standard.string(forKey: "visitorToken")
+
                 if let visitorToken = visitorToken {
                     components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: visitorToken))
                     components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
