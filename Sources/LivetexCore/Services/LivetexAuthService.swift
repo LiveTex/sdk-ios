@@ -52,12 +52,12 @@ public class LivetexAuthService {
             case let .custom(value):
                 let visitorToken = UserDefaults.standard.string(forKey: "visitorToken")
 
-                if let visitorToken = visitorToken {
+            //    if let visitorToken = visitorToken {
                     components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: visitorToken))
                     components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
-                } else {
-                    components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
-                }
+//                } else {
+//                    components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
+//                }
             }
         }
 
