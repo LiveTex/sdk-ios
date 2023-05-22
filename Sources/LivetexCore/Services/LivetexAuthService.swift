@@ -33,6 +33,9 @@ public class LivetexAuthService {
         self.authPath = authPath
     }
 
+   private var keychainItem: CFDictionary? = nil
+   private var ref: AnyObject?
+
     // MARK: - Authentication
 
     public func requestAuthorization(result: @escaping (Result<SessionToken, LTError>) -> Void) {
@@ -47,9 +50,18 @@ public class LivetexAuthService {
         if let token = token {
             switch token {
             case let .system(value):
+                self.keychainItem = [kSecValueData: value.data(using: .utf8)] as? CFDictionary
                 components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: value))
             case let .custom(value):
-                components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
+                let result = ref as? NSDictionary
+                let visitorTokenData = result?[kSecValueData] as? Data
+                if let visitorTokenData = visitorTokenData {
+                    let visitorToken = String(data: visitorTokenData, encoding: .utf8)
+                    components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: visitorToken))
+                    components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
+                } else {
+                    components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
+                }
             }
         }
 
