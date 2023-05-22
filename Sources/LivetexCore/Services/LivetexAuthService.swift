@@ -50,13 +50,14 @@ public class LivetexAuthService {
         if let token = token {
             switch token {
             case let .system(value):
-                self.keychainItem = [kSecValueData: value.data(using: .utf8)] as? CFDictionary
+                self.keychainItem = [kSecAttrAccount: value] as? CFDictionary
                 components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: value))
             case let .custom(value):
                 let result = ref as? NSDictionary
-                let visitorTokenData = result?[kSecValueData] as? Data
-                if let visitorTokenData = visitorTokenData {
-                    let visitorToken = String(data: visitorTokenData, encoding: .utf8)
+                let visitorToken = result?[kSecAttrAccount] as? String
+                print("April1 - visitorToken", visitorToken)
+                if let visitorToken = visitorToken {
+                    print("April2 - visitorToken", visitorToken)
                     components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: visitorToken))
                     components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
                 } else {
