@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Security
 
 public enum Token {
     case system(String)
@@ -55,9 +56,7 @@ public class LivetexAuthService {
             case let .custom(value):
                 let result = ref as? NSDictionary
                 let visitorToken = result?[kSecAttrAccount] as? String
-                print("April1 - visitorToken", visitorToken)
                 if let visitorToken = visitorToken {
-                    print("April2 - visitorToken", visitorToken)
                     components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: visitorToken))
                     components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
                 } else {
