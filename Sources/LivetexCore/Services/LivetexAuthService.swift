@@ -31,8 +31,8 @@ public class LivetexAuthService {
 
     // MARK: - Initialization
 
-    public init(visitorToken: String? = nil,
-                customVisitorToken: String? = nil,
+    public init(visitorToken: String?,
+                customVisitorToken: String?,
                 deviceToken: String,
                 authPath: String? = nil) {
         self.visitorToken = visitorToken
