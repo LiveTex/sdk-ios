@@ -8,11 +8,6 @@
 
 import Foundation
 
-//public enum Token {
-//    case system(String)
-//    case custom(String)
-//}
-
 public struct AuthData {
     let customVisitorToken: String?
     let visitorToken: String?
@@ -21,8 +16,6 @@ public struct AuthData {
 private let defaultAuthPath = "https://visitor-api.livetex.ru/v1/auth"
 
 public class LivetexAuthService {
-
-  //  private let token: Token?
 
     private let deviceToken: String
     private let authPath: String?
