@@ -8,16 +8,11 @@
 
 import Foundation
 
-public struct AuthData {
-    let customVisitorToken: String?
-    let visitorToken: String?
-}
-
 private let defaultAuthPath = "https://visitor-api.livetex.ru/v1/auth"
 
 public class LivetexAuthService {
 
-    private let deviceToken: String
+    private let deviceToken: String?
     private let authPath: String?
     private let visitorToken: String?
     private let customVisitorToken: String?
@@ -26,7 +21,7 @@ public class LivetexAuthService {
 
     public init(visitorToken: String? = nil,
                 customVisitorToken: String? = nil,
-                deviceToken: String,
+                deviceToken: String? = nil,
                 authPath: String? = nil) {
         self.visitorToken = visitorToken
         self.customVisitorToken = customVisitorToken
@@ -42,21 +37,10 @@ public class LivetexAuthService {
         components?.queryItems = [
             URLQueryItem(name: "touchPoint", value: livetexInfo?["LivetexAppID"]),
             URLQueryItem(name: "deviceToken", value: deviceToken),
-            URLQueryItem(name: "deviceType", value: "ios")
+            URLQueryItem(name: "deviceType", value: "ios"),
+            URLQueryItem(name: "visitorToken", value: visitorToken),
+            URLQueryItem(name: "customVisitorToken", value: customVisitorToken)
         ].filter { $0.value != nil }
-
-
-        switch (visitorToken, customVisitorToken) {
-        case (visitorToken, customVisitorToken):
-            components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: visitorToken))
-            components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: customVisitorToken))
-        case (visitorToken, nil):
-            components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: visitorToken))
-        case (nil, customVisitorToken):
-            components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: customVisitorToken))
-        default:
-            components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: ""))
-        }
 
         guard let authURL = components?.url else {
             result(.failure(.invalidURL))
