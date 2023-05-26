@@ -8,27 +8,23 @@
 
 import Foundation
 
-public enum Token {
-    case system(String)
-    case custom(String)
-}
-
 private let defaultAuthPath = "https://visitor-api.livetex.ru/v1/auth"
 
 public class LivetexAuthService {
 
-    private let token: Token?
-
-    private let deviceToken: String
-
+    private let deviceToken: String?
     private let authPath: String?
+    private let visitorToken: String?
+    private let customVisitorToken: String?
 
     // MARK: - Initialization
 
-    public init(token: Token? = nil,
-                deviceToken: String,
+    public init(visitorToken: String? = nil,
+                customVisitorToken: String? = nil,
+                deviceToken: String? = nil,
                 authPath: String? = nil) {
-        self.token = token
+        self.visitorToken = visitorToken
+        self.customVisitorToken = customVisitorToken
         self.deviceToken = deviceToken
         self.authPath = authPath
     }
@@ -41,17 +37,10 @@ public class LivetexAuthService {
         components?.queryItems = [
             URLQueryItem(name: "touchPoint", value: livetexInfo?["LivetexAppID"]),
             URLQueryItem(name: "deviceToken", value: deviceToken),
-            URLQueryItem(name: "deviceType", value: "ios")
+            URLQueryItem(name: "deviceType", value: "ios"),
+            URLQueryItem(name: "visitorToken", value: visitorToken),
+            URLQueryItem(name: "customVisitorToken", value: customVisitorToken)
         ].filter { $0.value != nil }
-
-        if let token = token {
-            switch token {
-            case let .system(value):
-                components?.queryItems?.append(URLQueryItem(name: "visitorToken", value: value))
-            case let .custom(value):
-                components?.queryItems?.append(URLQueryItem(name: "customVisitorToken", value: value))
-            }
-        }
 
         guard let authURL = components?.url else {
             result(.failure(.invalidURL))
