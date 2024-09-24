@@ -11,6 +11,7 @@ extension ClientEvent {
     enum CodingKeys: String, CodingKey {
         case id
         case type
+        case rate
         case value
         case offset
         case content

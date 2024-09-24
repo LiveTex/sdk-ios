@@ -12,7 +12,7 @@ public extension ClientEvent {
         case text(String)
         case file(MessageAttachment)
         case typing(String)
-        case rating(String)
+        case rating(VoteResult)
         case department(String)
         case getHistory(String, Int)
         case attributes(Attributes)
@@ -25,7 +25,7 @@ public extension ClientEvent {
             switch self {
             case let .rating(value):
                 try container.encode(ClientEvent.EventType.rating, forKey: .type)
-                try container.encode(value, forKey: .value)
+                try container.encode(value, forKey: .rate)
             case let .text(content):
                 try container.encode(ClientEvent.EventType.text, forKey: .type)
                 try container.encode(content, forKey: .content)
