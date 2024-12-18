@@ -12,7 +12,7 @@ public extension ClientEvent {
         case text(String)
         case file(MessageAttachment)
         case typing(String)
-        case rating(VoteResult)
+        case rating(SendVoteResult, String?)
         case department(String)
         case getHistory(String, Int)
         case attributes(Attributes)
@@ -23,9 +23,10 @@ public extension ClientEvent {
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             switch self {
-            case let .rating(value):
+            case let .rating(value, text):
                 try container.encode(ClientEvent.EventType.rating, forKey: .type)
                 try container.encode(value, forKey: .rate)
+                try container.encode(text, forKey: .comment )
             case let .text(content):
                 try container.encode(ClientEvent.EventType.text, forKey: .type)
                 try container.encode(content, forKey: .content)
