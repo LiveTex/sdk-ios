@@ -11,7 +11,8 @@ import Foundation
 public struct ClientEvent: Encodable {
     public let correlationId = UUID().uuidString
     public let content: Content
-
+    public let comment: String? = nil
+    
     // MARK: - Initialization
 
     public init(_ content: Content) {
@@ -23,6 +24,9 @@ public struct ClientEvent: Encodable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(correlationId, forKey: .correlationId)
+        if let comment = comment {
+            try container.encode(comment, forKey: .comment)
+        }
         try content.encode(to: encoder)
     }
 }
