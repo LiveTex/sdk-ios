@@ -42,6 +42,7 @@ final class LivetexURLSessionWebSocket: NSObject, LivetexWebSocketConnection {
     private let url: URL
     private var session: URLSession?
     private var task: URLSessionWebSocketTask?
+    private var didReportClose = false
 
     init(url string: String) {
         self.url = URL(string: string)!
@@ -107,6 +108,10 @@ final class LivetexURLSessionWebSocket: NSObject, LivetexWebSocketConnection {
                 self.task = nil
                 self.session?.invalidateAndCancel()
                 self.report { $0.webSocketError(error as NSError) }
+                // Старый транспорт на ошибке тоже сообщает о закрытии — сохраняем это поведение.
+                self.reportClose(code: URLSessionWebSocketTask.CloseCode.abnormalClosure.rawValue,
+                                 reason: error.localizedDescription,
+                                 wasClean: false)
             }
         }
     }
@@ -120,6 +125,12 @@ final class LivetexURLSessionWebSocket: NSObject, LivetexWebSocketConnection {
     private func reportError(_ error: Error?) {
         guard let error = error else { return }
         report { $0.webSocketError(error as NSError) }
+    }
+
+    private func reportClose(code: Int, reason: String, wasClean: Bool) {
+        guard !didReportClose else { return }
+        didReportClose = true
+        report { $0.webSocketClose(code, reason: reason, wasClean: wasClean) }
     }
 }
 
@@ -147,6 +158,6 @@ extension LivetexURLSessionWebSocket: URLSessionWebSocketDelegate {
         task = nil
         self.session?.invalidateAndCancel()
         let text = reason.flatMap { String(data: $0, encoding: .utf8) } ?? ""
-        report { $0.webSocketClose(closeCode.rawValue, reason: text, wasClean: closeCode == .normalClosure) }
+        reportClose(code: closeCode.rawValue, reason: text, wasClean: closeCode == .normalClosure)
     }
 }

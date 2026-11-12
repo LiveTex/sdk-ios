@@ -20,6 +20,12 @@ public enum LivetexTrust {
             return
         }
 
+        // SecTrustEvaluateWithError появился в iOS 12; на более старых системах оставляем системную проверку.
+        guard #available(iOS 12.0, macOS 10.14, tvOS 12.0, watchOS 5.0, *) else {
+            completionHandler(.performDefaultHandling, nil)
+            return
+        }
+
         let isTrusted = configure(trust, anchors: anchors)
 
         if isTrusted {
