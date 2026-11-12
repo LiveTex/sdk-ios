@@ -5,7 +5,6 @@ import PackageDescription
 
 let package = Package(
     name: "LivetexCore",
-    platforms: [.iOS(.v13)],
     products: [
         .library(name: "LivetexCore", targets: ["LivetexCore"]),
     ],
