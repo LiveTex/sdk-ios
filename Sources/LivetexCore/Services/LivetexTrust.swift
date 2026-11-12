@@ -20,15 +20,20 @@ public enum LivetexTrust {
             return
         }
 
-        let anchorsStatus = SecTrustSetAnchorCertificates(trust, anchors as CFArray)
-        let onlyAnchorsStatus = SecTrustSetAnchorCertificatesOnly(trust, false)
-        let isTrusted = anchorsStatus == errSecSuccess && onlyAnchorsStatus == errSecSuccess && evaluate(trust)
+        let isTrusted = configure(trust, anchors: anchors)
 
         if isTrusted {
             completionHandler(.useCredential, URLCredential(trust: trust))
         } else {
             completionHandler(.cancelAuthenticationChallenge, nil)
         }
+    }
+
+    /// Добавляет переданные якоря к системным и проверяет цепочку.
+    static func configure(_ trust: SecTrust, anchors: [SecCertificate]) -> Bool {
+        let anchorsStatus = SecTrustSetAnchorCertificates(trust, anchors as CFArray)
+        let onlyAnchorsStatus = SecTrustSetAnchorCertificatesOnly(trust, false)
+        return anchorsStatus == errSecSuccess && onlyAnchorsStatus == errSecSuccess && evaluate(trust)
     }
 
     private static let certificateInfoKey = "LivetexRootCertificate"
@@ -67,14 +72,14 @@ public enum LivetexTrust {
         return Bundle.main.url(forResource: name, withExtension: ext)
     }
 
-    private static func certificates(from data: Data) -> [SecCertificate] {
+    static func certificates(from data: Data) -> [SecCertificate] {
         if let text = String(data: data, encoding: .utf8), text.contains("-----BEGIN CERTIFICATE-----") {
             return pemBlocks(from: text).compactMap { SecCertificateCreateWithData(nil, $0 as CFData) }
         }
         return [SecCertificateCreateWithData(nil, data as CFData)].compactMap { $0 }
     }
 
-    private static func pemBlocks(from text: String) -> [Data] {
+    static func pemBlocks(from text: String) -> [Data] {
         var blocks: [Data] = []
         var body: String?
         for line in text.components(separatedBy: .newlines) {
