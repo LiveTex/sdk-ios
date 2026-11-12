@@ -17,17 +17,17 @@ public class LivetexSessionService: WebSocketDelegate {
 
     public var eventQueue: DispatchQueue = .main {
         didSet {
-            webSocket.eventQueue = eventQueue
+            webSocket?.eventQueue = eventQueue
         }
     }
 
     public var isConnected: Bool {
-        return webSocket.readyState == .open
+        return webSocket?.isOpen ?? false
     }
 
     private let token: SessionToken
 
-    private var webSocket = WebSocket()
+    private var webSocket: LivetexWebSocketConnection?
 
     private let mapper = Mapper()
 
@@ -50,15 +50,26 @@ public class LivetexSessionService: WebSocketDelegate {
     }
 
     private func startSession() {
-        webSocket = WebSocket(token.endpoints.ws)
-        webSocket.delegate = self
-        webSocket.eventQueue = eventQueue
-        webSocket.open()
+        webSocket?.delegate = nil
+        webSocket?.closeConnection()
+        let connection = makeConnection()
+        connection.delegate = self
+        connection.eventQueue = eventQueue
+        webSocket = connection
+        connection.openConnection()
+    }
+
+    private func makeConnection() -> LivetexWebSocketConnection {
+        if #available(iOS 13.0, macOS 10.15, tvOS 13.0, watchOS 6.0, *), LivetexTrust.isEnabled {
+            return LivetexURLSessionWebSocket(url: token.endpoints.ws)
+        }
+        return WebSocket(token.endpoints.ws)
     }
 
     private func stopSession() {
-        webSocket.delegate = nil
-        webSocket.close()
+        webSocket?.delegate = nil
+        webSocket?.closeConnection()
+        webSocket = nil
     }
 
     // MARK: - Receive Event
@@ -78,7 +89,7 @@ public class LivetexSessionService: WebSocketDelegate {
         eventQueue.async { [weak self] in
             do {
                 let payload = try self?.mapper.encode(event) ?? ""
-                self?.webSocket.send(text: payload)
+                self?.webSocket?.sendText(payload)
             } catch {
                 self?.onError?(error)
             }
@@ -126,7 +137,7 @@ public class LivetexSessionService: WebSocketDelegate {
     }
 
     @objc private func onTimerScheduled() {
-        webSocket.ping()
+        webSocket?.sendPing()
     }
 
     // MARK: - Send File
@@ -151,7 +162,7 @@ public class LivetexSessionService: WebSocketDelegate {
         uploadData.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8) ?? Data())
         uploadData.append(data)
         uploadData.append("\r\n--\(boundary)--\r\n".data(using: .utf8) ?? Data())
-        URLSession.shared.uploadTask(with: request, from: uploadData) { data, response, error in
+        LivetexTrust.session.uploadTask(with: request, from: uploadData) { data, response, error in
             if let error = error {
                 completionHandler(.failure(.requestFailed(error)))
             } else {

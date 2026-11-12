@@ -33,7 +33,8 @@ public class LivetexAuthService {
 
     public func requestAuthorization(result: @escaping (Result<SessionToken, LTError>) -> Void) {
         let livetexInfo = Bundle.main.infoDictionary?["Livetex"] as? [String: String]
-        var components = URLComponents(string: authPath ?? defaultAuthPath)
+        let configuredAuthPath = authPath ?? livetexInfo?["LivetexAuthPath"] ?? defaultAuthPath
+        var components = URLComponents(string: configuredAuthPath)
         components?.queryItems = [
             URLQueryItem(name: "touchPoint", value: livetexInfo?["LivetexAppID"]),
             URLQueryItem(name: "deviceToken", value: deviceToken),
@@ -47,7 +48,7 @@ public class LivetexAuthService {
             return
         }
 
-        URLSession.shared.dataTask(with: authURL) { data, response, error in
+        LivetexTrust.session.dataTask(with: authURL) { data, response, error in
             if let error = error {
                 result(.failure(.requestFailed(error)))
             } else {
